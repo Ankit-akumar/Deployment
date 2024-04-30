@@ -6,7 +6,7 @@ server="10.44.11.240"
 server_knode1="10.44.11.241"
 server_knode2="10.44.11.242"
 
-##
+## Optimize further
 checkApplicationPods() {
     app_pods="kubectl get pods | grep -vE 'Running'"
     command="echo '$password' | sudo -S $app_pods"
@@ -34,7 +34,7 @@ checkPostgresPromoted() {
     fi
 }
 
-##
+## Base file size shd be same even if 0 rows in slave
 checkPostgresReplication() {
     get_postgres_pods="kubectl get pods | awk '/postgres/ && !/manager/ && !/postgres12/ {print \$1}'"
     command="echo '$password' | sudo -S $get_postgres_pods"
@@ -73,7 +73,7 @@ checkLoadAverage() {
     fi
 }
 
-##
+## When to renew
 checkCertificateExpiry() {
     get_residual_time="kubeadm certs check-expiration | grep 'admin.conf'" 
     command="echo '$password' | sudo -S $get_residual_time"
