@@ -5,7 +5,9 @@ import os
 
 # Create your views here.
 
-def executePostDeploymentChecks(request):
+def postDeploymentChecks(request):
+    site = request.GET.get('site')
+    print(site)
     try:
         script_path = os.path.join(os.path.dirname(__file__), 'deployment_checks.sh')
         subprocess.run(["bash", script_path], check=True)

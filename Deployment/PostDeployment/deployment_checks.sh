@@ -4,6 +4,7 @@ username="gor"
 password="apj0702"
 server="10.44.11.240"
 server_knode1="10.44.11.241"
+server_knode2="10.44.11.242"
 
 ##
 checkApplicationPods() {
@@ -55,20 +56,20 @@ checkPostgresReplication() {
 
 checkLoadAverage() {
     command="uptime"
-    load_average_kmaster=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
-    load_average_kmaster=$(echo "$load_average_kmaster" | awk -F 'load average: ' '{print $2}')
+    load_average_server=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$1" "$command")
+    load_average_server=$(echo "$load_average_server" | awk -F 'load average: ' '{print $2}')
 
     flag=0
-    for number in $(echo "$load_average_kmaster" | tr ',' ' '); do
+    for number in $(echo "$load_average_server" | tr ',' ' '); do
         if (( $(echo "$number > 2" | bc -l) )); then
-            echo -e "\nAverage load on kmaster is high - $load_average_kmaster\n"
+            echo -e "\nAverage load on server is high - $1 - $load_average_server\n"
             flag=1
             break
         fi
     done
 
     if [ "$flag" -eq 0 ]; then
-        echo -e "\nAverage load on kmaster is stable - $load_average_kmaster"
+        echo -e "\nAverage load on server is stable - $1 - $load_average_server"
     fi
 }
 
@@ -117,7 +118,9 @@ checkPostgresPromoted
 checkPostgresReplication
 
 # Check load average on all nodes
-checkLoadAverage
+checkLoadAverage "$server"
+checkLoadAverage "$server_knode1"
+checkLoadAverage "$server_knode2"
 
 # Check k8s certificate expiry
 checkCertificateExpiry

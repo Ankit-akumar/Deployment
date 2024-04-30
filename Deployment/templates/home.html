@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment</title>
+</head>
+<body>
+    <form action = "" method = "POST">
+        {% csrf_token %} 
+        <h2>Select the Deployment Type:</h2>
+        <select name="deployment_type" id="deployment_type" multiple>
+            <option value="pre_deployment">Pre Deployment Checks</option>
+            <option value="post_deployment">Post Deployment Checks</option>
+        </select>
+
+        <h2>Select the Site:</h2>
+        <select name="site" id="site" multiple>
+            <option value="AABel">Active Ants Belgium</option>
+            <option value="AAUK">Active Ants UK</option>
+            <option value="AAGer">Active Ants Germany</option>
+            <option value="AANL">Active Ants Netherlands</option>
+            <option value="HnMP1">H&M Project One</option>
+            <option value="HnMCan">H&M Canada</option>
+        </select>
+        <br><br>
+        <input type="submit" value="GO">
+    </form>
+</body>
+</html>
