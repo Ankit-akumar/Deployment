@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post Deployment</title>
+    <style>
+        .resizable-textarea {
+            resize: none; 
+            overflow: hidden; 
+        }
+    
+        .content {
+            max-width: 800px;
+            margin: auto;
+            background-color: lightgray;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content" style="border: thin solid black">
+        <h3>Post Deployment Checks Results</h3>
+        <h3>Application pods not in running state</h3>
+        <textarea readonly id="textarea1" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea1')">{{ app_pods }}</textarea>
+
+        <h3>System pods not in running state</h3>
+        <textarea readonly id="textarea2" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea2')">{{ system_pods }}</textarea>
+
+        <h3>Check Postgres Promoted </h3><p>(Postgres should not be promoted)</p>
+        <textarea readonly id="textarea3" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea3')">{{ postgres_promoted }}</textarea>
+
+        <h3>Check Postgres Replication </h3><p>(Postgres Replication should be working)</p>
+        <textarea readonly id="textarea4" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea4')">{{ postgres_replication }}</textarea>
+
+        <h3>Average Load on Kmaster server </h3>
+        <textarea readonly id="textarea5" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea5')">{{ load_kmaster }}</textarea>
+
+        <h3>Average Load on Knode1 server </h3>
+        <textarea readonly id="textarea6" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea6')">{{ load_knode1 }}</textarea>
+
+        <h3>Average Load on Knode2 server </h3>
+        <textarea readonly id="textarea7" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea7')">{{ load_knode2 }}</textarea>
+
+        <h3>Number of days to Kubernetes certificate expiry </h3>
+        <textarea readonly id="textarea8" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea8')">{{ certificate_expiry }}</textarea>
+
+        <h3>NFS service status </h3>
+        <textarea readonly id="textarea9" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea9')">{{ nfs_status }}</textarea>
+
+        <script>
+            function autoResize(textareaId) {
+                var textarea = document.getElementById(textareaId);
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
+            }
+
+            autoResize('textarea1');
+            autoResize('textarea2');
+            autoResize('textarea3');
+            autoResize('textarea4');
+            autoResize('textarea5');
+            autoResize('textarea6');
+            autoResize('textarea7');
+            autoResize('textarea8');
+            autoResize('textarea9');
+        </script>
+    </div>
+</body>
+</html>

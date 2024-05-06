@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post Deployment</title>
+    <style>
+        .resizable-textarea {
+            resize: none; 
+            overflow: hidden; 
+        }
+    
+        .content {
+            max-width: 800px;
+            margin: auto;
+            background-color: lightgray;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content" style="border: thin solid black">
+        <h3>Pre Deployment Checks results</h3>
+        <h3>Bots with tasks</h3>
+        <textarea readonly id="textarea1" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea1')">{{ bot_tasks }}</textarea>
+
+        <script>
+            function autoResize(textareaId) {
+                var textarea = document.getElementById(textareaId);
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
+            }
+
+            autoResize('textarea1');
+        </script>
+    </div>
+</body>
+</html>

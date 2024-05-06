@@ -1,36 +1,38 @@
 #!bin/bash
 
 username="gor"
-password="apj0702"
-server="10.44.11.240"
-server_knode1="10.44.11.241"
-server_knode2="10.44.11.242"
+password="JEZ3*pj_!?nVm4="
+server="10.32.11.243"
+server_knode1="10.32.11.241"
+server_knode2="10.32.11.242"
+
+# output_file="output_post.txt"
 
 ## Optimize further
 checkApplicationPods() {
     app_pods="kubectl get pods | grep -vE 'Running'"
     command="echo '$password' | sudo -S $app_pods"
     not_running_app_pods=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
-    echo -e "\nApplication Pods that are not in running state - \n$not_running_app_pods"
+    echo -e "app_pods\n$not_running_app_pods\nEND_OF_OUTPUT\n" > output_post.txt
 }
 
 checkSystemPods() {
     system_pods="kubectl get pods -n kube-system | grep -vE 'Running'"
     command="echo '$password' | sudo -S $system_pods"
     not_running_system_pods=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
-    echo -e "\nSystem pods that are not in running state - \n$not_running_system_pods"
+    echo -e "system_pods\n$not_running_system_pods\nEND_OF_OUTPUT\n" >> output_post.txt
 }
 
 checkPostgresPromoted() {
     get_postgres_promoted="kubectl get pods | grep 'postgres-promoted'"
     command="echo '$password' | sudo -S $get_postgres_promoted"
-    op=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
-    op=$(echo "$op" | tr -d '[:space:]')
+    postgres_promoted_status=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
+    postgres_promoted_status=$(echo "$postgres_promoted_status" | tr -d '[:space:]')
 
-    if [ ${#op} -eq 0 ]; then
-        echo -e "\nPostgres is not Promoted\n"
+    if [ ${#postgres_promoted_status} -eq 0 ]; then
+        echo -e "postgres_promoted\nPostgres is not Promoted\nEND_OF_OUTPUT\n" >> output_post.txt
     else
-        echo -e "\nPostgres is Promoted!!\n"
+        echo -e "postgres_promoted\nPostgres is Promoted!!\nEND_OF_OUTPUT\n" >> output_post.txt
     fi
 }
 
@@ -48,10 +50,36 @@ checkPostgresReplication() {
     replication_state_postgres=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
     echo -e "\n$replication_state_postgres\n"
 
+    if ! grep -q "streaming" <<< "$replication_state_postgres"; then
+        echo -e "postgres_replication\nPostgres Replication is not working\nEND_OF_OUTPUT\n" >> output_post.txt
+        return
+    fi
+
     get_replication_state_postgres_slave="kubectl exec -it $postgres_slave_pod bash -- su - postgres -c 'psql -c \"SELECT state FROM pg_stat_replication;\"'"
     command="echo '$password' | sudo -S $get_replication_state_postgres_slave"
     replication_state_postgres_slave=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
     echo -e "\n$replication_state_postgres_slave\n"
+
+    if ! grep -q "streaming" <<< "$replication_state_postgres_slave"; then
+        get_base_file_size="ls -ld /opt/data/postgres/base | cut -d' ' -f5"
+        command="echo '$password' | sudo -S $get_base_file_size"
+        base_file_size_knode1=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server_knode1" "$command")
+        echo -e "\n$base_file_size_knode1\n"
+
+        base_file_size_knode2=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server_knode2" "$command")
+        echo -e "\n$base_file_size_knode2\n"
+
+        base_file_size_knode1="$(echo -e "${base_file_size_knode1}" | tr -d '[:space:]')"
+        base_file_size_knode2="$(echo -e "${base_file_size_knode2}" | tr -d '[:space:]')"
+
+        if [ "$base_file_size_knode1" = "$base_file_size_knode2" ]; then
+            echo -e "postgres_replication\nPostgres Replication is working\nEND_OF_OUTPUT\n" >> output_post.txt
+        else
+            echo -e "postgres_replication\nPostgres Replication is not working\nEND_OF_OUTPUT\n" >> output_post.txt
+        fi
+    else
+        echo -e "postgres_replication\nPostgres Replication is working\nEND_OF_OUTPUT\n" >> output_post.txt
+    fi
 }
 
 checkLoadAverage() {
@@ -79,7 +107,7 @@ checkCertificateExpiry() {
     command="echo '$password' | sudo -S $get_residual_time"
     residual_time=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
     residual_time=$(echo $residual_time | awk '{print $(NF-1)}')
-    echo -e "\nNumber of days for Kubernetes cerificate expiry - $residual_time"
+    echo -e "certificate_expiry\n$residual_time\nEND_OF_OUTPUT\n" >> output_post.txt
 }
 
 checkNfs() {
@@ -87,9 +115,9 @@ checkNfs() {
     mounted_status=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$get_mounted_status")
     mounted_status=$(echo "$mounted_status" | tr -d '[:space:]')
     if [ -z "$mounted_status" ]; then
-        echo -e "\nNFS is not mounted on Kmaster"
+        echo -e "nfs_status\nNFS is not mounted on Kmaster\n" >> output_post.txt
     else 
-        echo -e "\nNFS is mounted"
+        echo -e "nfs_status\nNFS is mounted on Kmaster\n" >> output_post.txt
     fi
 
 
@@ -98,12 +126,11 @@ checkNfs() {
     service_status=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server_knode1" "$command")
     service_status=$(echo "$service_status" | tr -d '[:space:]')
     if [ -z "$service_status" ]; then
-        echo -e "\nNFS is not running - $service_status"
+        echo -e "nfs_status\nNFS is not running\nEND_OF_OUTPUT\n" >> output_post.txt
     else 
-        echo -e "\nNFS is running"
+        echo -e "nfs_status\nNFS is running\nEND_OF_OUTPUT\n" >> output_post.txt
     fi
 }
-
 
 # Gets a list of application pods that are not in running state
 checkApplicationPods
@@ -119,8 +146,16 @@ checkPostgresReplication
 
 # Check load average on all nodes
 checkLoadAverage "$server"
+kmaster_load_average="$load_average_server"
+echo -e "load_kmaster\n$kmaster_load_average\nEND_OF_OUTPUT\n" >> output_post.txt
+
 checkLoadAverage "$server_knode1"
+knode1_load_average="$load_average_server"
+echo -e "load_knode1\n$knode1_load_average\nEND_OF_OUTPUT\n" >> output_post.txt
+
 checkLoadAverage "$server_knode2"
+knode2_load_average="$load_average_server"
+echo -e "load_knode2\n$knode2_load_average\nEND_OF_OUTPUT\n" >> output_post.txt
 
 # Check k8s certificate expiry
 checkCertificateExpiry
