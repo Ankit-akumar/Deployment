@@ -1,20 +1,9 @@
 app_pods
-NAME                                      READY   STATUS      RESTARTS   AGE
-auth-cleanup-28581180-2vbbn               0/1     Completed   0          33h
-auth-cleanup-28582620-9zntl               0/1     Completed   0          9h
-bfs-fzwcx                                 0/1     Init:0/2    0          20d
-diagnosis-6f6658856c-pjj7q                0/3     Init:0/1    0          30d
-es-index-cleanup-28581180-c5pjn           0/1     Completed   0          33h
-es-index-cleanup-28582620-zbs5p           0/1     Completed   0          9h
-gpms-79grf                                0/1     Init:0/2    0          30d
-sam-cleanup-28581180-vhj2q                0/1     Completed   0          33h
-sam-cleanup-28582620-fzwpw                0/1     Completed   0          9h
-sorter-cleanup-28581180-fc7l4             0/1     Completed   0          33h
-sorter-cleanup-28582620-dlwfp             0/1     Completed   0          9h
+
 END_OF_OUTPUT
 
 system_pods
-NAME                                    READY   STATUS    RESTARTS   AGE
+
 END_OF_OUTPUT
 
 postgres_promoted
@@ -22,29 +11,29 @@ Postgres is not Promoted
 END_OF_OUTPUT
 
 postgres_replication
-Postgres Replication is working
+Postgres Replication is not working
 END_OF_OUTPUT
 
 load_kmaster
-2.92, 1.48, 0.96
+
 END_OF_OUTPUT
 
 load_knode1
-2.44, 2.44, 2.39
+
 END_OF_OUTPUT
 
 load_knode2
-0.77, 1.04, 1.16
+
 END_OF_OUTPUT
 
 certificate_expiry
-89d
+
 END_OF_OUTPUT
 
 nfs_status
-NFS is mounted on Kmaster
+NFS is not mounted on Kmaster
 
 nfs_status
-NFS is running
+NFS is not running
 END_OF_OUTPUT
 
