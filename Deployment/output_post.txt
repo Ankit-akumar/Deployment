@@ -1,16 +1,16 @@
 app_pods
 NAME                                      READY   STATUS      RESTARTS   AGE
-auth-cleanup-28581180-2vbbn               0/1     Completed   0          33h
-auth-cleanup-28582620-9zntl               0/1     Completed   0          9h
-bfs-fzwcx                                 0/1     Init:0/2    0          20d
-diagnosis-6f6658856c-pjj7q                0/3     Init:0/1    0          30d
-es-index-cleanup-28581180-c5pjn           0/1     Completed   0          33h
-es-index-cleanup-28582620-zbs5p           0/1     Completed   0          9h
-gpms-79grf                                0/1     Init:0/2    0          30d
-sam-cleanup-28581180-vhj2q                0/1     Completed   0          33h
-sam-cleanup-28582620-fzwpw                0/1     Completed   0          9h
-sorter-cleanup-28581180-fc7l4             0/1     Completed   0          33h
-sorter-cleanup-28582620-dlwfp             0/1     Completed   0          9h
+auth-cleanup-28582620-9zntl               0/1     Completed   0          33h
+auth-cleanup-28584060-g8jnz               0/1     Completed   0          9h
+bfs-fzwcx                                 0/1     Init:0/2    0          21d
+diagnosis-6f6658856c-pjj7q                0/3     Init:0/1    0          31d
+es-index-cleanup-28582620-zbs5p           0/1     Completed   0          33h
+es-index-cleanup-28584060-lwx6l           0/1     Completed   0          9h
+gpms-79grf                                0/1     Init:0/2    0          31d
+sam-cleanup-28582620-fzwpw                0/1     Completed   0          33h
+sam-cleanup-28584060-d92pw                0/1     Completed   0          9h
+sorter-cleanup-28582620-dlwfp             0/1     Completed   0          33h
+sorter-cleanup-28584060-j5q2l             0/1     Completed   0          9h
 END_OF_OUTPUT
 
 system_pods
@@ -26,19 +26,19 @@ Postgres Replication is working
 END_OF_OUTPUT
 
 load_kmaster
-2.92, 1.48, 0.96
+0.38, 0.51, 0.56
 END_OF_OUTPUT
 
 load_knode1
-2.44, 2.44, 2.39
+3.99, 2.71, 2.64
 END_OF_OUTPUT
 
 load_knode2
-0.77, 1.04, 1.16
+0.83, 0.95, 0.94
 END_OF_OUTPUT
 
 certificate_expiry
-89d
+88d
 END_OF_OUTPUT
 
 nfs_status
