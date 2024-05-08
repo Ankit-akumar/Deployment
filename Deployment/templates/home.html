@@ -4,27 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deployment</title>
+    <style>
+        .content {
+            max-width: 500px;
+            margin: auto;
+            background-color: #e3f2fd;
+            padding: 30px;
+        }
+        .navbar-brand {
+            font-size: x-large !important;
+        }
+    </style>
 </head>
 <body>
-    <form action = "" method = "POST">
-        {% csrf_token %} 
-        <h2>Select the Deployment Type:</h2>
-        <select name="deployment_type" id="deployment_type" multiple>
-            <option value="pre_deployment">Pre Deployment Checks</option>
-            <option value="post_deployment">Post Deployment Checks</option>
-        </select>
+    <nav class="navbar fixed-top" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+        <span class="navbar-brand mb-0 h2">
+            Deployment Dashboard
+        </span>
+        </div>
+    </nav>
+    
+    <div class="content" style="border: thin solid black">
+        <form action = "" method = "POST">
+            {% csrf_token %} 
+            <h3>Select the Deployment Type:</h2>
+            <select name="deployment_type" id="deployment_type" multiple>
+                <option value="pre_deployment">Pre Deployment Checks</option>
+                <option value="post_deployment">Post Deployment Checks</option>
+            </select>
 
-        <h2>Select the Site:</h2>
-        <select name="site" id="site" multiple>
-            <option value="AABel">Active Ants Belgium</option>
-            <option value="AAUK">Active Ants UK</option>
-            <option value="AAGer">Active Ants Germany</option>
-            <option value="AANL">Active Ants Netherlands</option>
-            <option value="HnMP1">H&M Project One</option>
-            <option value="HnMCan">H&M Canada</option>
-        </select>
-        <br><br>
-        <input type="submit" value="GO">
-    </form>
+            <h3>Select the Site:</h2>
+            <select name="site" id="site" multiple>
+                {% for value in site_model_instances %}
+                    <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button type="submit" class="btn btn-success">GO</button>
+        </form>
+    </div>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </body>
 </html>

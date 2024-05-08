@@ -1,10 +1,10 @@
 #!bin/bash
 
-username="gor"
-password="JEZ3*pj_!?nVm4="
-server="10.32.11.243"
-server_knode1="10.32.11.241"
-server_knode2="10.32.11.242"
+username="$1"
+password="$2"
+server="$3"
+server_knode1="$4"
+server_knode2="$5"
 
 ## Optimize further
 checkApplicationPods() {
@@ -12,6 +12,7 @@ checkApplicationPods() {
     command="echo '$password' | sudo -S $app_pods"
     not_running_app_pods=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command" 2>&1)
     echo -e "app_pods\n$not_running_app_pods\nEND_OF_OUTPUT\n" > output_post.txt
+    echo -e "$not_running_app_pods"
 }
 
 checkSystemPods() {
@@ -19,6 +20,7 @@ checkSystemPods() {
     command="echo '$password' | sudo -S $system_pods"
     not_running_system_pods=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command" 2>&1)
     echo -e "system_pods\n$not_running_system_pods\nEND_OF_OUTPUT\n" >> output_post.txt
+    echo -e "$not_running_system_pods"
 }
 
 checkPostgresPromoted() {
@@ -27,9 +29,8 @@ checkPostgresPromoted() {
     postgres_promoted_status=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command" 2>&1)
 
     # if [ $? -ne 0 ]; then
-    # echo -e "Error occured"
+    #     echo -e "Error occured"
     #     echo -e "postgres_promoted\n$postgres_promoted_status\nEND_OF_OUTPUT\n" >> output_post.txt
-    #     return
     # fi
         
     postgres_promoted_status=$(echo "$postgres_promoted_status" | tr -d '[:space:]')
@@ -45,6 +46,8 @@ checkPostgresReplication() {
     get_postgres_pods="kubectl get pods | awk '/postgres/ && !/manager/ && !/postgres12/ {print \$1}'"
     command="echo '$password' | sudo -S $get_postgres_pods"
     postgres_pods=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command" 2>&1)
+    echo -e "Postgres pods"
+    echo -e "$postgres_pods"
 
     if [ $? -ne 0 ]; then
         echo -e "postgres_replication\n$postgres_pods\nEND_OF_OUTPUT\n" >> output_post.txt
@@ -57,6 +60,7 @@ checkPostgresReplication() {
     get_replication_state_postgres="kubectl exec -it $postgres_pod bash -- su - postgres -c 'psql -c \"SELECT state FROM pg_stat_replication;\"'"
     command="echo '$password' | sudo -S $get_replication_state_postgres"
     replication_state_postgres=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command" 2>&1)
+    echo -e "replication_state_postgres"
     echo -e "\n$replication_state_postgres\n"
 
     if [ $? -ne 0 ]; then

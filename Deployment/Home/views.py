@@ -2,17 +2,23 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from .models import SiteModel
 
 
 # Create your views here.
 
 @csrf_exempt
 def home_view(request):    
+    site_model_instances = SiteModel.objects.all()
+    for site_instance in site_model_instances:
+        print(site_instance.name)
+        
     if request.method == 'POST':
         deployment_type = request.POST.get('deployment_type')
         print(deployment_type)
         site = request.POST.get('site')
         print(site)
+
         if(deployment_type == 'pre_deployment'):
             url = reverse('PreDeployment:preDeploymentChecks') + f'?site={site}'
             return HttpResponseRedirect(url)
@@ -20,4 +26,4 @@ def home_view(request):
             url = reverse('PostDeployment:postDeploymentChecks') + f'?site={site}'
             return HttpResponseRedirect(url)
     
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'site_model_instances': site_model_instances})
