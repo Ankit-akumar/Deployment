@@ -1,5 +1,16 @@
 app_pods
-
+NAME                                      READY   STATUS      RESTARTS   AGE
+auth-cleanup-28584060-g8jnz               0/1     Completed   0          38h
+auth-cleanup-28585500-5fg9b               0/1     Completed   0          14h
+bfs-fzwcx                                 0/1     Init:0/2    0          22d
+diagnosis-6f6658856c-pjj7q                0/3     Init:0/1    0          32d
+es-index-cleanup-28584060-lwx6l           0/1     Completed   0          38h
+es-index-cleanup-28585500-jmjqp           0/1     Completed   0          14h
+gpms-79grf                                0/1     Init:0/2    0          32d
+sam-cleanup-28584060-d92pw                0/1     Completed   0          38h
+sam-cleanup-28585500-6v62q                0/1     Completed   0          14h
+sorter-cleanup-28584060-j5q2l             0/1     Completed   0          38h
+sorter-cleanup-28585500-8vtlc             0/1     Completed   0          14h
 END_OF_OUTPUT
 
 system_pods
@@ -15,19 +26,19 @@ Postgres Replication is not working
 END_OF_OUTPUT
 
 load_kmaster
-
+1.17, 1.19, 1.08
 END_OF_OUTPUT
 
 load_knode1
-
+1.35, 2.46, 2.65
 END_OF_OUTPUT
 
 load_knode2
-
+0.88, 1.28, 1.58
 END_OF_OUTPUT
 
 certificate_expiry
-
+87d
 END_OF_OUTPUT
 
 nfs_status

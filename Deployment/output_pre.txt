@@ -1,100 +1,112 @@
 bot_tasks
 
-Bot ID: 6192, Task Type: wait_queue_ops
+Bot ID: 6370, Task Type: wait_queue_ops
 
-Bot ID: 6367, Task Type: wait_queue_ops
-
-Bot ID: 6338, Task Type: wait_queue_ops
-
-Bot ID: 6179, Task Type: induction
-
-Bot ID: 6185, Task Type: wait_queue_ops
-
-Bot ID: 6165, Task Type: wait_queue_ops
-
-Bot ID: 6188, Task Type: wait_queue_ops
-
-Bot ID: 6176, Task Type: wait_queue_ops
-
-Bot ID: 6180, Task Type: wait_queue_ops
-
-Bot ID: 6355, Task Type: charge
-
-Bot ID: 6364, Task Type: wait_queue_ops
-
-Bot ID: 6183, Task Type: wait_queue_ops
-
-Bot ID: 6351, Task Type: wait_queue_ops
-
-Bot ID: 6184, Task Type: wait_queue_ops
-
-Bot ID: 6357, Task Type: wait_queue_ops
+Bot ID: 6367, Task Type: sortation
 
 Bot ID: 6337, Task Type: wait_queue_ops
 
+Bot ID: 6184, Task Type: wait_queue_ops
+
 Bot ID: 6194, Task Type: wait_queue_ops
-
-Bot ID: 6361, Task Type: wait_queue_ops
-
-Bot ID: 6170, Task Type: wait_queue_ops
-
-Bot ID: 6346, Task Type: wait_queue_ops
-
-Bot ID: 6169, Task Type: wait_queue_ops
-
-Bot ID: 6359, Task Type: wait_queue_ops
-
-Bot ID: 6164, Task Type: wait_queue_ops
-
-Bot ID: 6356, Task Type: wait_queue_ops
-
-Bot ID: 6358, Task Type: sortation
-
-Bot ID: 6167, Task Type: wait_queue_ops
-
-Bot ID: 6191, Task Type: charge
-
-Bot ID: 6366, Task Type: charge
-
-Bot ID: 6177, Task Type: wait_queue_ops
-
-Bot ID: 6363, Task Type: wait_queue_ops
-
-Bot ID: 6171, Task Type: wait_queue_ops
-
-Bot ID: 6174, Task Type: wait_queue_ops
-
-Bot ID: 6369, Task Type: wait_queue_ops
-
-Bot ID: 6189, Task Type: wait_queue_ops
-
-Bot ID: 6344, Task Type: wait_queue_ops
-
-Bot ID: 6166, Task Type: wait_queue_ops
-
-Bot ID: 6342, Task Type: induction
-
-Bot ID: 6172, Task Type: wait_queue_ops
-
-Bot ID: 6173, Task Type: wait_queue_ops
-
-Bot ID: 6350, Task Type: sortation
-
-Bot ID: 6186, Task Type: wait_queue_ops
-
-Bot ID: 6360, Task Type: wait_queue_ops
-
-Bot ID: 6362, Task Type: charge
-
-Bot ID: 6168, Task Type: wait_queue_ops
-
-Bot ID: 6181, Task Type: wait_queue_ops
 
 Bot ID: 6187, Task Type: wait_queue_ops
 
-Bot ID: 6193, Task Type: parking
+Bot ID: 6170, Task Type: induction
 
-Bot ID: 6354, Task Type: sortation
+Bot ID: 6369, Task Type: wait_queue_ops
+
+Bot ID: 6164, Task Type: wait_queue_ops
+
+Bot ID: 6181, Task Type: wait_queue_ops
+
+Bot ID: 6173, Task Type: sortation
+
+Bot ID: 6362, Task Type: wait_queue_ops
+
+Bot ID: 6338, Task Type: wait_queue_ops
+
+Bot ID: 6361, Task Type: sortation
+
+Bot ID: 6166, Task Type: wait_queue_ops
+
+Bot ID: 6180, Task Type: wait_queue_ops
+
+Bot ID: 6188, Task Type: sortation
+
+Bot ID: 6189, Task Type: sortation
+
+Bot ID: 6350, Task Type: sortation
+
+Bot ID: 6366, Task Type: sortation
+
+Bot ID: 6360, Task Type: wait_queue_ops
+
+Bot ID: 6172, Task Type: wait_queue_ops
+
+Bot ID: 6179, Task Type: sortation
+
+Bot ID: 6365, Task Type: wait_queue_ops
+
+Bot ID: 6359, Task Type: wait_queue_ops
+
+Bot ID: 6178, Task Type: move
+
+Bot ID: 6174, Task Type: sortation
+
+Bot ID: 6364, Task Type: wait_queue_ops
+
+Bot ID: 6177, Task Type: sortation
+
+Bot ID: 6358, Task Type: wait_queue_ops
+
+Bot ID: 6182, Task Type: wait_queue_ops
+
+Bot ID: 6357, Task Type: wait_queue_ops
+
+Bot ID: 6169, Task Type: wait_queue_ops
+
+Bot ID: 6346, Task Type: charge
+
+Bot ID: 6183, Task Type: wait_queue_ops
+
+Bot ID: 6355, Task Type: wait_queue_ops
+
+Bot ID: 6171, Task Type: sortation
+
+Bot ID: 6167, Task Type: wait_queue_ops
+
+Bot ID: 6351, Task Type: wait_queue_ops
+
+Bot ID: 6176, Task Type: sortation
+
+Bot ID: 6354, Task Type: wait_queue_ops
+
+Bot ID: 6193, Task Type: sortation
+
+Bot ID: 6344, Task Type: sortation
+
+Bot ID: 6165, Task Type: wait_queue_ops
+
+Bot ID: 6192, Task Type: wait_queue_ops
+
+Bot ID: 6190, Task Type: sortation
+
+Bot ID: 6356, Task Type: wait_queue_ops
+
+Bot ID: 6368, Task Type: wait_queue_ops
+
+Bot ID: 6185, Task Type: charge
+
+Bot ID: 6168, Task Type: sortation
+
+Bot ID: 6186, Task Type: wait_queue_ops
+
+Bot ID: 6191, Task Type: charge
+
+Bot ID: 6342, Task Type: wait_queue_ops
+
+Bot ID: 6363, Task Type: wait_queue_ops
 
 END_OF_OUTPUT
 

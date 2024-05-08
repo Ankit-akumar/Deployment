@@ -11,7 +11,7 @@
         .content {
             max-width: 800px;
             margin: auto;
-            background-color: lightgray;
+            background-color: #e3f2fd;
             padding: 30px;
         }
     </style>
@@ -45,7 +45,6 @@
 
         <h3>NFS service status </h3>
         <textarea readonly id="textarea9" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea9')">{{ nfs_status }}</textarea>
-
         <script>
             function autoResize(textareaId) {
                 var textarea = document.getElementById(textareaId);
@@ -63,6 +62,7 @@
             autoResize('textarea8');
             autoResize('textarea9');
         </script>
+        <br>
     </div>
 </body>
 </html>
