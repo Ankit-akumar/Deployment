@@ -37,7 +37,7 @@ def get_instance_by_field_value(site):
 def postDeploymentChecks(request):
     site = request.GET.get('site')
     print(site)
-
+    
     instance = get_instance_by_field_value(site)
     if instance:
         print("Instance found:", instance)

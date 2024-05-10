@@ -19,11 +19,12 @@ def home_view(request):
         site = request.POST.get('site')
         print(site)
 
-        if(deployment_type == 'pre_deployment'):
-            url = reverse('PreDeployment:preDeploymentChecks') + f'?site={site}'
-            return HttpResponseRedirect(url)
-        elif(deployment_type == 'post_deployment'):
-            url = reverse('PostDeployment:postDeploymentChecks') + f'?site={site}'
-            return HttpResponseRedirect(url)
+        if(deployment_type != 'none' and site != 'none'):
+            if(deployment_type == 'pre_deployment'):
+                url = reverse('PreDeployment:preDeploymentChecks') + f'?site={site}'
+                return HttpResponseRedirect(url)
+            elif(deployment_type == 'post_deployment'):
+                url = reverse('PostDeployment:postDeploymentChecks') + f'?site={site}'
+                return HttpResponseRedirect(url)
     
     return render(request, 'home.html', {'site_model_instances': site_model_instances})

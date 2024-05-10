@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Post Deployment</title>
+    <title>Pre Deployment</title>
     <style>
         .resizable-textarea {
             resize: none; 
@@ -22,6 +22,12 @@
         <h3>Bots with tasks</h3>
         <textarea readonly id="textarea1" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea1')">{{ bot_tasks }}</textarea>
 
+        <h3>Induct Status</h3>
+        <textarea readonly id="textarea2" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea2')">{{ induct_status }}</textarea>
+
+        <h3>Wait Station Status</h3>
+        <textarea readonly id="textarea3" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea3')">{{ ws_status }}</textarea>
+
         <script>
             function autoResize(textareaId) {
                 var textarea = document.getElementById(textareaId);
@@ -30,6 +36,8 @@
             }
 
             autoResize('textarea1');
+            autoResize('textarea2');
+            autoResize('textarea3');
         </script>
         <br>
     </div>

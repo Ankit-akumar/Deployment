@@ -2,14 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import subprocess
 import os
+from Home.models import SiteModel
 
 # Create your views here.
-
-username="gor"
-password="apj0702"
-server="10.44.11.240"
-server_knode1="10.44.11.241" 
-server_knode2="10.44.11.242" 
 
 
 def readDataFromFile(start_string):
@@ -17,40 +12,73 @@ def readDataFromFile(start_string):
         with open('output_pre.txt', 'r') as file:
             start_reading = False
 
-            contents = ""
-            for line in file:
-                if start_string in line:
-                    start_reading = True
-                    continue
-                if "END_OF_OUTPUT" in line and start_reading:
-                    break
-                if start_reading:
-                    contents += line
-            return contents
+            if(start_string == 'bot_tasks'):
+                contents = ""
+                for line in file:
+                    if start_string in line:
+                        start_reading = True
+                        continue
+                    if "END_OF_OUTPUT" in line and start_reading:
+                        break
+                    if start_reading:
+                        contents += line
+                return contents
+            else :
+                contents = ""
+                for line in file:
+                    if start_string in line:
+                        start_reading = True
+                        continue
+                    if "END_OF_OUTPUT" in line and start_reading:
+                        break
+                    if start_reading:
+                        contents += line
+                return contents
     
     except FileNotFoundError:
-        return f"File 'output_post.txt' not found."
+        return f"File 'output_pre.txt' not found."
 
-
+def get_instance_by_field_value(site):
+    try:
+        instance = SiteModel.objects.get(name=site)
+        return instance
+    except SiteModel.DoesNotExist:
+        return None
 
 def preDeploymentChecks(request):
     site = request.GET.get('site')
     print(site)
-    try:
-        script_path = os.path.abspath('PreDeployment/pre_deployment_checks.sh')
-        subprocess.run(["bash", script_path])
 
-        bot_tasks = readDataFromFile('bot_tasks')
+    instance = get_instance_by_field_value(site)
+    if instance:
+        print(instance)
+        try:
+            username = instance.username
+            password = instance.password
+            server = instance.kmaster_IP_address
+            server_knode1 = instance.knode1_IP_address
+            server_knode2 = instance.knode2_IP_address
 
-        context = {
-            'bot_tasks': bot_tasks,
-        }
-    except FileNotFoundError:
-        print(f"Error: Bash script '{script_path}' not found.")
-    except subprocess.CalledProcessError as e:
-        print(f"Error: Bash script '{script_path}' failed with exit code {e.returncode}.")
-        print("Output:")
-        print(e.output.decode())
+            script_path = os.path.abspath('PreDeployment/pre_deployment_checks.sh')
+            subprocess.run(["bash", script_path, username, password, server, server_knode1, server_knode2])
+
+            bot_tasks = readDataFromFile('bot_tasks')
+            induct_status = readDataFromFile('induct_status')
+            ws_status = readDataFromFile('ws_status')
+
+            context = {
+                'bot_tasks': bot_tasks,
+                'induct_status': induct_status,
+                'ws_status': ws_status,
+            }
+        except FileNotFoundError:
+            print(f"Error: Bash script '{script_path}' not found.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error: Bash script '{script_path}' failed with exit code {e.returncode}.")
+            print("Output:")
+            print(e.output.decode())
+    else:
+        print("No instance found for "+ site)
 
     return render(request, 'preDeployment.html', context)
 

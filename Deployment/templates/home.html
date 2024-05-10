@@ -31,13 +31,14 @@
             {% csrf_token %} 
             <h3>Select the Deployment Type:</h2>
             <select name="deployment_type" id="deployment_type">
-                <option value="pre_deployment">Pre Deployment Checks</option>
-                <option value="post_deployment">Post Deployment Checks</option>
+                <option value="none">select deployment type</option>
+                <option value="pre_deployment">Pre Deployment</option>
+                <option value="post_deployment">Post Deployment</option>
             </select>
 
             <h3>Select the Site:</h2>
             <select name="site" id="site">
-                <!-- <option value="none">Select a site</option> -->
+                <option value="none">select a site</option>
                 {% for value in site_model_instances %}
                     <option value="{{ value }}">{{ value }}</option>
                 {% endfor %}
