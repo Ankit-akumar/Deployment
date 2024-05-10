@@ -1,20 +1,20 @@
 app_pods
 NAME                                      READY   STATUS      RESTARTS   AGE
-auth-cleanup-28584060-g8jnz               0/1     Completed   0          38h
-auth-cleanup-28585500-5fg9b               0/1     Completed   0          14h
-bfs-fzwcx                                 0/1     Init:0/2    0          22d
-diagnosis-6f6658856c-pjj7q                0/3     Init:0/1    0          32d
-es-index-cleanup-28584060-lwx6l           0/1     Completed   0          38h
-es-index-cleanup-28585500-jmjqp           0/1     Completed   0          14h
-gpms-79grf                                0/1     Init:0/2    0          32d
-sam-cleanup-28584060-d92pw                0/1     Completed   0          38h
-sam-cleanup-28585500-6v62q                0/1     Completed   0          14h
-sorter-cleanup-28584060-j5q2l             0/1     Completed   0          38h
-sorter-cleanup-28585500-8vtlc             0/1     Completed   0          14h
+auth-cleanup-28585500-5fg9b               0/1     Completed   0          35h
+auth-cleanup-28586940-499gk               0/1     Completed   0          11h
+bfs-fzwcx                                 0/1     Init:0/2    0          23d
+diagnosis-6f6658856c-pjj7q                0/3     Init:0/1    0          33d
+es-index-cleanup-28585500-jmjqp           0/1     Completed   0          35h
+es-index-cleanup-28586940-cjzcp           0/1     Completed   0          11h
+gpms-79grf                                0/1     Init:0/2    0          33d
+sam-cleanup-28585500-6v62q                0/1     Completed   0          35h
+sam-cleanup-28586940-zmwpw                0/1     Completed   0          11h
+sorter-cleanup-28585500-8vtlc             0/1     Completed   0          35h
+sorter-cleanup-28586940-vd7n2             0/1     Completed   0          11h
 END_OF_OUTPUT
 
 system_pods
-
+NAME                                    READY   STATUS    RESTARTS   AGE
 END_OF_OUTPUT
 
 postgres_promoted
@@ -22,29 +22,29 @@ Postgres is not Promoted
 END_OF_OUTPUT
 
 postgres_replication
-Postgres Replication is not working
+Postgres Replication is working
 END_OF_OUTPUT
 
 load_kmaster
-1.17, 1.19, 1.08
+1.00, 0.78, 0.85
 END_OF_OUTPUT
 
 load_knode1
-1.35, 2.46, 2.65
+1.80, 3.16, 3.31
 END_OF_OUTPUT
 
 load_knode2
-0.88, 1.28, 1.58
+0.71, 0.99, 1.26
 END_OF_OUTPUT
 
 certificate_expiry
-87d
+86d
 END_OF_OUTPUT
 
 nfs_status
-NFS is not mounted on Kmaster
+NFS is mounted on Kmaster
 
 nfs_status
-NFS is not running
+NFS is running
 END_OF_OUTPUT
 

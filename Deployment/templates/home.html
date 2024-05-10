@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deployment</title>
+    <link rel="stylesheet" href="templates/style.css">
     <style>
         .content {
             max-width: 500px;
@@ -26,24 +27,34 @@
     </nav>
     
     <div class="content" style="border: thin solid black">
-        <form action = "" method = "POST">
+        <form id="my-form" action = "" method = "POST">
             {% csrf_token %} 
             <h3>Select the Deployment Type:</h2>
-            <select name="deployment_type" id="deployment_type" multiple>
+            <select name="deployment_type" id="deployment_type">
                 <option value="pre_deployment">Pre Deployment Checks</option>
                 <option value="post_deployment">Post Deployment Checks</option>
             </select>
 
             <h3>Select the Site:</h2>
-            <select name="site" id="site" multiple>
+            <select name="site" id="site">
+                <!-- <option value="none">Select a site</option> -->
                 {% for value in site_model_instances %}
                     <option value="{{ value }}">{{ value }}</option>
                 {% endfor %}
             </select>
             <br><br>
-            <button type="submit" class="btn btn-success">GO</button>
+            <div class="btn-container"> 
+                <button id="loadButton" class="btn btn-success" type="submit"> 
+                    Submit 
+                    <div class="loader" id="loader"> 
+  
+                    </div> 
+                </button> 
+            </div> 
         </form>
     </div>
+
+    <script src="script.js"></script> 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
