@@ -14,17 +14,29 @@ def home_view(request):
         print(site_instance.name)
         
     if request.method == 'POST':
-        deployment_type = request.POST.get('deployment_type')
-        print(deployment_type)
-        site = request.POST.get('site')
-        print(site)
+        form_type = request.POST.get('form_id')
 
-        if(deployment_type != 'none' and site != 'none'):
-            if(deployment_type == 'pre_deployment'):
-                url = reverse('PreDeployment:preDeploymentChecks') + f'?site={site}'
+        if form_type == 'deployment-form':
+            deployment_type = request.POST.get('deployment_type')
+            print(deployment_type)
+            site = request.POST.get('site')
+            print(site)
+
+            if(deployment_type != 'none' and site != 'none'):
+                if(deployment_type == 'pre_deployment'):
+                    url = reverse('PreDeployment:preDeploymentChecks') + f'?site={site}'
+                    return HttpResponseRedirect(url)
+                elif(deployment_type == 'post_deployment'):
+                    url = reverse('PostDeployment:postDeploymentChecks') + f'?site={site}'
+                    return HttpResponseRedirect(url)
+        
+        if form_type == 'maintenance-form':
+            site = request.POST.get('site')
+            print(site)
+
+            if(site != 'none'):
+                url = reverse('Maintenance:maintenanceChecks') + f'?site={site}'
                 return HttpResponseRedirect(url)
-            elif(deployment_type == 'post_deployment'):
-                url = reverse('PostDeployment:postDeploymentChecks') + f'?site={site}'
-                return HttpResponseRedirect(url)
+
     
     return render(request, 'home.html', {'site_model_instances': site_model_instances})

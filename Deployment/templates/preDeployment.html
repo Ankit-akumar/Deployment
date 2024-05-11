@@ -22,7 +22,7 @@
     <div class="content">
         <h3>Pre Deployment Checks results</h3>
         <h3>Bots with tasks</h3> <p>No tasks should be present on bots</p>
-        <textarea readonly id="textarea1" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea1')">{{ bot_tasks }}</textarea>
+        <textarea readonly id="textarea1" class="textarea" rows="5" cols="80" style="width: 100%;">{{ bot_tasks }}</textarea>
 
         <h3>Induct Status</h3> <p>All inducts should be stopped</p>
         <textarea readonly id="textarea2" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea2')">{{ induct_status }}</textarea>
@@ -37,7 +37,7 @@
                 textarea.style.height = (textarea.scrollHeight) + 'px';
             }
 
-            autoResize('textarea1');
+            // autoResize('textarea1');
             autoResize('textarea2');
             autoResize('textarea3');
         </script>

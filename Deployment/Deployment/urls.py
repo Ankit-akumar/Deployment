@@ -24,4 +24,5 @@ urlpatterns = [
     #path('pre_deployment/<str:site>/', include("PreDeployment.urls"), name='pre_deployment'),
     path('pre_deployment/', include(("PreDeployment.urls", 'PreDeployment'), namespace='PreDeployment')),
     path('post_deployment/', include(("PostDeployment.urls", 'PostDeployment'), namespace='PostDeployment')),
+    path('maintenance/', include(('Maintenance.urls', 'Maintenance'), namespace='Maintenance')),
 ]
