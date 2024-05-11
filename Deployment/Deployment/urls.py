@@ -19,7 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("Home.urls")),
+    path('', include("Home.urls"), name='home'),
+    path('accounts/', include("django.contrib.auth.urls")),
     #path('pre_deployment/<str:site>/', include("PreDeployment.urls"), name='pre_deployment'),
     path('pre_deployment/', include(("PreDeployment.urls", 'PreDeployment'), namespace='PreDeployment')),
     path('post_deployment/', include(("PostDeployment.urls", 'PostDeployment'), namespace='PostDeployment')),
