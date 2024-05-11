@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Pre Deployment</title>
+{% extends "base.html" %}
+
+{% block title %}Pre Deployment{% endblock %}
+{% block css %}
     <style>
         .resizable-textarea {
             resize: none; 
             overflow: hidden; 
+            width: 100%;
         }
     
         .content {
-            max-width: 800px;
-            margin: auto;
-            background-color: #e3f2fd;
-            padding: 30px;
+            padding-left: 30px;
+            padding-right: 30px;
         }
     </style>
-</head>
-<body>
-    <div class="content" style="border: thin solid black">
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+    <div class="content">
         <h3>Pre Deployment Checks results</h3>
         <h3>Bots with tasks</h3> <p>No tasks should be present on bots</p>
         <textarea readonly id="textarea1" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea1')">{{ bot_tasks }}</textarea>
@@ -41,5 +43,10 @@
         </script>
         <br>
     </div>
-</body>
-</html>
+
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
+
