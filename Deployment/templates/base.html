@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  <style>
+        .myspans {
+            float: right;
+            color: white;
+        }
+  </style>
+  {% block css %}
+  {% endblock %}
+</head>
+
+<body>
+  <main>
+    <nav class="navbar fixed-top" style="background-color: black;">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h2" style="color: white;">
+                Home
+            </span>
+            <div class="myspans">
+            <span class="logout-section">
+                {% if user.is_authenticated %}
+                <p style="margin: 5px;">Welcome {{ user.username }}</p>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Log Out</button>
+                  </form>
+                {% endif %}
+            </span>
+            </div>
+        </div>
+    </nav>
+
+        {% block content %}
+        {% endblock %}
+  </main>
+</body>
+
+</html>

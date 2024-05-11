@@ -1,41 +1,86 @@
 bot_tasks
 
-No tasks present on bots.
+Bot ID: 6374, Task Type: sortation
+
+Bot ID: 6383, Task Type: wait_queue_ops
+
+Bot ID: 6392, Task Type: sortation
+
+Bot ID: 6372, Task Type: charge
+
+Bot ID: 6396, Task Type: induction
+
+Bot ID: 6393, Task Type: wait_queue_ops
+
+Bot ID: 6389, Task Type: sortation
+
+Bot ID: 6386, Task Type: parking
+
+Bot ID: 6400, Task Type: parking
+
+Bot ID: 6394, Task Type: wait_queue_ops
+
+Bot ID: 6371, Task Type: wait_queue_ops
+
+Bot ID: 6387, Task Type: wait_queue_ops
+
+Bot ID: 6378, Task Type: sortation
+
+Bot ID: 6391, Task Type: sortation
+
+Bot ID: 6399, Task Type: sortation
+
+Bot ID: 6398, Task Type: sortation
+
+Bot ID: 6377, Task Type: sortation
+
+Bot ID: 6388, Task Type: wait_queue_ops
+
+Bot ID: 6385, Task Type: sortation
+
 END_OF_OUTPUT
 
 induct_status
+
+Induct ID : 5, Status : active
+
+Induct ID : 44, Status : active
+
+Induct ID : 36, Status : active
 
 Induct ID : 32, Status : active
 
 Induct ID : 4, Status : active
 
-Induct ID : 44, Status : active
+Induct ID : 2, Status : active
 
 Induct ID : 3, Status : active
 
-Induct ID : 2, Status : active
-
 Induct ID : 1, Status : active
 
-Induct ID : 34, Status : error
+Induct ID : 34, Status : active
 
 END_OF_OUTPUT
 
 ws_status
 
+Wait Station ID : 5, Status : active
+
+Wait Station ID : 44, Status : active
+
+Wait Station ID : 36, Status : active
+
 Wait Station ID : 32, Status : active
 
 Wait Station ID : 4, Status : active
 
-Wait Station ID : 44, Status : active
+Wait Station ID : 2, Status : active
 
 Wait Station ID : 3, Status : active
 
-Wait Station ID : 2, Status : active
-
 Wait Station ID : 1, Status : active
 
-Wait Station ID : 34, Status : error
+Wait Station ID : 34, Status : active
 
 END_OF_OUTPUT
 

@@ -1,68 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deployment</title>
-    <link rel="stylesheet" href="templates/style.css">
-    <style>
-        .content {
-            max-width: 500px;
-            margin: auto;
-            background-color: #e3f2fd;
-            padding: 30px;
-        }
-        .navbar-brand {
-            font-size: x-large !important;
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar fixed-top" style="background-color: #e3f2fd;">
-        <div class="container-fluid">
-        <span class="navbar-brand mb-0 h2">
-            Deployment Dashboard
-        </span>
-        </div>
-    </nav>
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block css %}
+<style>
+    .content {
+        max-width: 500px;
+        margin: auto;
+        background-color: #e3f2fd;
+        padding: 30px;
+    }
+    .navbar-brand {
+        font-size: x-large !important;
+    }
+</style>
+{% endblock %}
     
-    <div class="content" style="border: thin solid black">
-        <form id="my-form" action = "" method = "POST">
-            {% csrf_token %} 
-            <h3>Select the Deployment Type:</h2>
-            <select name="deployment_type" id="deployment_type">
-                <option value="none">select deployment type</option>
-                <option value="pre_deployment">Pre Deployment</option>
-                <option value="post_deployment">Post Deployment</option>
-            </select>
+{% block content %}
+{% if user.is_authenticated %}
+<div class="content" style="border: thin solid black">
+    <form id="my-form" action = "" method = "POST">
+        {% csrf_token %} 
+        <h3>Select the Deployment Type:</h2>
+        <select name="deployment_type" id="deployment_type">
+            <option value="none">select deployment type</option>
+            <option value="pre_deployment">Pre Deployment</option>
+            <option value="post_deployment">Post Deployment</option>
+        </select>
+        <h3>Select the Site:</h2>
+        <select name="site" id="site">
+            <option value="none">select a site</option>
+            {% for value in site_model_instances %}
+                <option value="{{ value }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <div class="btn-container"> 
+            <button id="loadButton" class="btn btn-success" type="submit"> 
+                Submit 
+                <div class="loader" id="loader"> 
 
-            <h3>Select the Site:</h2>
-            <select name="site" id="site">
-                <option value="none">select a site</option>
-                {% for value in site_model_instances %}
-                    <option value="{{ value }}">{{ value }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <div class="btn-container"> 
-                <button id="loadButton" class="btn btn-success" type="submit"> 
-                    Submit 
-                    <div class="loader" id="loader"> 
-  
-                    </div> 
-                </button> 
-            </div> 
-        </form>
-    </div>
+                </div> 
+            </button> 
+        </div> 
+    </form>
+</div>
 
-    <script src="script.js"></script> 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-</body>
-</html>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
