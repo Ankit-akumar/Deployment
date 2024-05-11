@@ -1,44 +1,45 @@
 app_pods
-NAME                                      READY   STATUS      RESTARTS   AGE
-auth-cleanup-28585500-5fg9b               0/1     Completed   0          35h
-auth-cleanup-28586940-499gk               0/1     Completed   0          11h
-bfs-fzwcx                                 0/1     Init:0/2    0          23d
-diagnosis-6f6658856c-pjj7q                0/3     Init:0/1    0          33d
-es-index-cleanup-28585500-jmjqp           0/1     Completed   0          35h
-es-index-cleanup-28586940-cjzcp           0/1     Completed   0          11h
-gpms-79grf                                0/1     Init:0/2    0          33d
-sam-cleanup-28585500-6v62q                0/1     Completed   0          35h
-sam-cleanup-28586940-zmwpw                0/1     Completed   0          11h
-sorter-cleanup-28585500-8vtlc             0/1     Completed   0          35h
-sorter-cleanup-28586940-vd7n2             0/1     Completed   0          11h
+[sudo] password for gor: NAME                                      READY   STATUS      RESTARTS   AGE
+auth-cleanup-28588380-c2vrf               0/1     Completed   0          45h
+auth-cleanup-28589820-25f8s               0/1     Completed   0          21h
+bfs-658pm                                 0/1     Init:0/2    0          34d
+diagnosis-6f6658856c-ft8l2                0/3     Init:0/1    0          34d
+es-index-cleanup-28588380-db95m           0/1     Completed   0          45h
+es-index-cleanup-28589820-cqmfk           0/1     Completed   0          21h
+gpms-g457n                                0/1     Init:0/2    0          34d
+sam-cleanup-28588380-589pb                0/1     Completed   0          45h
+sam-cleanup-28589820-9dfng                0/1     Completed   0          21h
+sorter-cleanup-28588380-2n87q             0/1     Completed   0          45h
+sorter-cleanup-28589820-mpzc5             0/1     Completed   0          21h
+station-dashboard-szqm5                   0/1     Completed   0          34d
 END_OF_OUTPUT
 
 system_pods
-NAME                                    READY   STATUS    RESTARTS   AGE
+[sudo] password for gor: NAME                                    READY   STATUS    RESTARTS   AGE
 END_OF_OUTPUT
 
 postgres_promoted
-Postgres is not Promoted
+Postgres is Promoted!!
 END_OF_OUTPUT
 
 postgres_replication
-Postgres Replication is working
+Postgres Replication is not working
 END_OF_OUTPUT
 
 load_kmaster
-1.00, 0.78, 0.85
+0.23, 0.34, 0.33
 END_OF_OUTPUT
 
 load_knode1
-1.80, 3.16, 3.31
+0.83, 0.57, 0.49
 END_OF_OUTPUT
 
 load_knode2
-0.71, 0.99, 1.26
+0.49, 0.48, 0.50
 END_OF_OUTPUT
 
 certificate_expiry
-86d
+273d
 END_OF_OUTPUT
 
 nfs_status

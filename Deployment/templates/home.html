@@ -53,7 +53,7 @@
     </div>
     <div id="content1" class="expanded-content" onclick="stopPropagation(event)">
         <div class="content" style="border: thin lightgray">
-            <form id="my-form" action = "" method = "POST">
+            <form id="deployment-form" action = "" method = "POST">
                 {% csrf_token %} 
                 <h4>Select the Deployment Type:</h2>
                 <select name="deployment_type" id="deployment_type">
@@ -69,6 +69,7 @@
                     {% endfor %}
                 </select>
                 <br><br>
+                <input type="hidden" name="form_id" value="deployment-form">
                 <div class="btn-container"> 
                     <button id="loadButton" class="btn btn-success" type="submit"> 
                         Submit 
@@ -78,16 +79,15 @@
                 </div> 
             </form>
         </div>
-        
     </div>
   </div>
   
   <div class="row" onclick="toggleContent('content2')">
     <div class="row-content">
-        <h3 style="padding-left: 20px;">Maintenance Checks</h3>
+        <h3 style="padding-left: 20px;">Maintenance checks</h3>
     </div>
     <div id="content2" class="expanded-content" onclick="stopPropagation(event)">
-        <form id="my-form" action = "" method = "POST">
+        <form id="maintenance-form" action = "" method = "POST">
             {% csrf_token %} 
             <h4>Select the Site:</h2>
             <select name="site" id="site">
@@ -97,6 +97,7 @@
                 {% endfor %}
             </select>
             <br><br>
+            <input type="hidden" name="form_id" value="maintenance-form">
             <div class="btn-container"> 
                 <button id="loadButton" class="btn btn-success" type="submit"> 
                     Submit 

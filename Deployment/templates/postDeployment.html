@@ -21,9 +21,9 @@
 {% if user.is_authenticated %}
 
     <div class="content">
-        <h3>Post Deployment Checks Results</h3>
+        <h3>{{ heading }}</h3>
         <h4>Application pods not in running state</h4>
-        <textarea readonly id="textarea1" class="extarea" rows="5" cols="80" style="width: 100%;">{{ app_pods }}</textarea>
+        <textarea readonly id="textarea1" class="textarea" rows="5" cols="80" style="width: 100%;">{{ app_pods }}</textarea>
 
         <h4>System pods not in running state</h4>
         <textarea readonly id="textarea2" class="resizable-textarea" rows="1" cols="80" oninput="autoResize('textarea2')">{{ system_pods }}</textarea>

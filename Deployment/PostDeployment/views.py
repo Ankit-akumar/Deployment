@@ -33,6 +33,48 @@ def get_instance_by_field_value(site):
         return instance
     except SiteModel.DoesNotExist:
         return None
+    
+def executeScript(instance):
+    try:            
+        username = instance.username
+        password = instance.password
+        server = instance.kmaster_IP_address
+        server_knode1 = instance.knode1_IP_address
+        server_knode2 = instance.knode2_IP_address
+
+        script_path = os.path.abspath('PostDeployment/post_deployment_checks.sh')
+        subprocess.run(["bash", script_path, username, password, server, server_knode1, server_knode2])
+
+        app_pods = readDataFromFile('app_pods')
+        system_pods = readDataFromFile('system_pods')
+        postgres_promoted = readDataFromFile('postgres_promoted')
+        postgres_replication = readDataFromFile('postgres_replication')
+        load_kmaster = readDataFromFile('load_kmaster')
+        load_knode1 = readDataFromFile('load_knode1')
+        load_knode2 = readDataFromFile('load_knode2')
+        certificate_expiry = readDataFromFile('certificate_expiry')
+        nfs_status = readDataFromFile('nfs_status')
+
+        context = {
+            'heading': 'Post Deployment Check Results',
+            'app_pods': app_pods,
+            'system_pods': system_pods,
+            'postgres_promoted': postgres_promoted,
+            'postgres_replication': postgres_replication,
+            'load_kmaster': load_kmaster,
+            'load_knode1': load_knode1,
+            'load_knode2': load_knode2,
+            'certificate_expiry': certificate_expiry,
+            'nfs_status': nfs_status,
+        }
+
+        return context
+    except FileNotFoundError:
+        print(f"Error: Bash script '{script_path}' not found.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error: Bash script '{script_path}' failed with exit code {e.returncode}.")
+        print("Output:")
+        print(e.output.decode())
 
 def postDeploymentChecks(request):
     site = request.GET.get('site')
@@ -41,45 +83,7 @@ def postDeploymentChecks(request):
     instance = get_instance_by_field_value(site)
     if instance:
         print("Instance found:", instance)
-
-        try:
-            username = instance.username
-            password = instance.password
-            server = instance.kmaster_IP_address
-            server_knode1 = instance.knode1_IP_address
-            server_knode2 = instance.knode2_IP_address
-
-            script_path = os.path.abspath('PostDeployment/post_deployment_checks.sh')
-            subprocess.run(["bash", script_path, username, password, server, server_knode1, server_knode2])
-
-            app_pods = readDataFromFile('app_pods')
-            system_pods = readDataFromFile('system_pods')
-            postgres_promoted = readDataFromFile('postgres_promoted')
-            postgres_replication = readDataFromFile('postgres_replication')
-            load_kmaster = readDataFromFile('load_kmaster')
-            load_knode1 = readDataFromFile('load_knode1')
-            load_knode2 = readDataFromFile('load_knode2')
-            certificate_expiry = readDataFromFile('certificate_expiry')
-            nfs_status = readDataFromFile('nfs_status')
-
-            context = {
-                'app_pods': app_pods,
-                'system_pods': system_pods,
-                'postgres_promoted': postgres_promoted,
-                'postgres_replication': postgres_replication,
-                'load_kmaster': load_kmaster,
-                'load_knode1': load_knode1,
-                'load_knode2': load_knode2,
-                'certificate_expiry': certificate_expiry,
-                'nfs_status': nfs_status,
-            }
-        except FileNotFoundError:
-            print(f"Error: Bash script '{script_path}' not found.")
-        except subprocess.CalledProcessError as e:
-            print(f"Error: Bash script '{script_path}' failed with exit code {e.returncode}.")
-            print("Output:")
-            print(e.output.decode())
-
+        context = executeScript(instance)
     else:
         print("Instance not found for the given site value.")
     
