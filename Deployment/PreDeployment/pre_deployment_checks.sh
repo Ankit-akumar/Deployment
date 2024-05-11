@@ -6,12 +6,17 @@ server="$3"
 server_knode1="$4"
 server_knode2="$5"
 
-getBotsTasks() {
+getPostgresPod() {
     get_postgres_pods="kubectl get pods | awk '/postgres/ && !/manager/ && !/postgres12/ {print \$1}'"
     command="echo '$password' | sudo -S $get_postgres_pods"
     postgres_pods=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
 
     postgres_pod=$(echo "$postgres_pods" | grep -v 'slave')
+    echo "$postgres_pod"
+}
+
+getBotsTasks() {
+    getPostgresPod
     echo "$postgres_pod"
 
     get_bot_tasks="kubectl exec -it $postgres_pod bash -- su - postgres -c 'psql -d bfspilot -c \"select bot_id, task_type from bots;\"'"
@@ -39,11 +44,7 @@ getBotsTasks() {
 }
 
 getInductStatus() {
-    get_postgres_pods="kubectl get pods | awk '/postgres/ && !/manager/ && !/postgres12/ {print \$1}'"
-    command="echo '$password' | sudo -S $get_postgres_pods"
-    postgres_pods=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
-
-    postgres_pod=$(echo "$postgres_pods" | grep -v 'slave')
+    getPostgresPod
     echo "$postgres_pod"
 
     get_induct_status="kubectl exec -it $postgres_pod bash -- su - postgres -c 'psql -d bfspilot -c \"select induct_id, status from inducts;\"'"
@@ -71,11 +72,7 @@ getInductStatus() {
 }
 
 get_ws_status() {
-    get_postgres_pods="kubectl get pods | awk '/postgres/ && !/manager/ && !/postgres12/ {print \$1}'"
-    command="echo '$password' | sudo -S $get_postgres_pods"
-    postgres_pods=$(sshpass -p "$password" ssh -o StrictHostKeyChecking=no "$username"@"$server" "$command")
-
-    postgres_pod=$(echo "$postgres_pods" | grep -v 'slave')
+    getPostgresPod
     echo "$postgres_pod"
 
     get_ws_status="kubectl exec -it $postgres_pod bash -- su - postgres -c 'psql -d bfspilot -c \"select wait_station_id, status from wait_stations;\"'"

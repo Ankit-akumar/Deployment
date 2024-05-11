@@ -12,28 +12,16 @@ def readDataFromFile(start_string):
         with open('output_pre.txt', 'r') as file:
             start_reading = False
 
-            if(start_string == 'bot_tasks'):
-                contents = ""
-                for line in file:
-                    if start_string in line:
-                        start_reading = True
-                        continue
-                    if "END_OF_OUTPUT" in line and start_reading:
-                        break
-                    if start_reading:
-                        contents += line
-                return contents
-            else :
-                contents = ""
-                for line in file:
-                    if start_string in line:
-                        start_reading = True
-                        continue
-                    if "END_OF_OUTPUT" in line and start_reading:
-                        break
-                    if start_reading:
-                        contents += line
-                return contents
+            contents = ""
+            for line in file:
+                if start_string in line:
+                    start_reading = True
+                    continue
+                if "END_OF_OUTPUT" in line and start_reading:
+                    break
+                if start_reading:
+                    contents += line
+            return contents
     
     except FileNotFoundError:
         return f"File 'output_pre.txt' not found."
@@ -81,52 +69,6 @@ def preDeploymentChecks(request):
         print("No instance found for "+ site)
 
     return render(request, 'preDeployment.html', context)
-
-
-
-
-
-
-# def executeSudoCommandOnServer(server_ip, sub_command):
-#     command = "echo '"+password+"' | sudo -S "+sub_command+""
-#     ssh_command = 'sshpass -p "'+ password +'" ssh -o StrictHostKeyChecking=no "'+ username +'"@"'+ server_ip + '" "' +command +'"'
-#     result = subprocess.run(ssh_command, shell=True, capture_output=True, text=True)
-#     return result
-
-# def getRunningPostgresPod():
-#     command = "kubectl get pods | grep 'postgres' | grep -ve 'manager' -e 'postgres12' -e 'slave'"
-#     result = executeSudoCommandOnServer(server, command)
-
-#     if result.returncode != 0:
-#         print(result.stderr)
-#         return result.stderr
-#     else:
-#         print(result.stdout)
-#         columns = result.stdout.split()
-#         print(columns[0])
-#         return columns[0]
-
-# def getBotsTasks(postgres_pod):
-#     # get_bots_tasks = " kubectl exec -it "+postgres_pod+" bash -- su - postgres -c 'psql -d bfspilot -c \"select bot_id, task_type from bots;\"' "
-#     # result = executeSudoCommandOnServer(server, get_bots_tasks)
-
-#     # if result.returncode != 0:
-#     #     print(result.stderr)
-#     #     return result.stderr
-#     # else:
-#     #     print(result.stdout)
-#     #     return result.stdout
-
-#     get_bots_tasks = f'kubectl exec -it {postgres_pod} -- su - postgres -c "psql -d bfspilot -c \\"select bot_id, task_type from bots;\\""'
-#     command = f'echo "{password}" | sudo -S {get_bots_tasks}'
-#     ssh_command = f'sshpass -p "{password}" ssh -o StrictHostKeyChecking=no {username}@{server} "{command}"'
-
-
-#     result = subprocess.run(ssh_command, shell=True, capture_output=True, text=True)
-#     if result.returncode != 0:
-#         print("Error:", result.stderr)
-#     else:
-#         print("Output:", result.stdout)
 
 
 
@@ -448,7 +390,47 @@ def preDeploymentChecks(request):
 # # # downloading sms config (httpnotifiers.csv)
 # # downloadSmsConfig(smsDbDriver)
 # # smsDbDriver.quit()
-    
-# # Taking server backup
 
+
+
+# def executeSudoCommandOnServer(server_ip, sub_command):
+#     command = "echo '"+password+"' | sudo -S "+sub_command+""
+#     ssh_command = 'sshpass -p "'+ password +'" ssh -o StrictHostKeyChecking=no "'+ username +'"@"'+ server_ip + '" "' +command +'"'
+#     result = subprocess.run(ssh_command, shell=True, capture_output=True, text=True)
+#     return result
+
+# def getRunningPostgresPod():
+#     command = "kubectl get pods | grep 'postgres' | grep -ve 'manager' -e 'postgres12' -e 'slave'"
+#     result = executeSudoCommandOnServer(server, command)
+
+#     if result.returncode != 0:
+#         print(result.stderr)
+#         return result.stderr
+#     else:
+#         print(result.stdout)
+#         columns = result.stdout.split()
+#         print(columns[0])
+#         return columns[0]
+
+# def getBotsTasks(postgres_pod):
+#     # get_bots_tasks = " kubectl exec -it "+postgres_pod+" bash -- su - postgres -c 'psql -d bfspilot -c \"select bot_id, task_type from bots;\"' "
+#     # result = executeSudoCommandOnServer(server, get_bots_tasks)
+
+#     # if result.returncode != 0:
+#     #     print(result.stderr)
+#     #     return result.stderr
+#     # else:
+#     #     print(result.stdout)
+#     #     return result.stdout
+
+#     get_bots_tasks = f'kubectl exec -it {postgres_pod} -- su - postgres -c "psql -d bfspilot -c \\"select bot_id, task_type from bots;\\""'
+#     command = f'echo "{password}" | sudo -S {get_bots_tasks}'
+#     ssh_command = f'sshpass -p "{password}" ssh -o StrictHostKeyChecking=no {username}@{server} "{command}"'
+
+
+#     result = subprocess.run(ssh_command, shell=True, capture_output=True, text=True)
+#     if result.returncode != 0:
+#         print("Error:", result.stderr)
+#     else:
+#         print("Output:", result.stdout)
 
