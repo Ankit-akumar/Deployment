@@ -12,7 +12,7 @@ def maintenanceChecks(request):
 
     if instance:
         print("Instance found:", instance)
-        context = executeScript(instance)
+        context = checkServerHealth(instance)
         context['heading'] = 'Maintenance Check Results'
     else:
         print("Instance not found for the given site value.")
