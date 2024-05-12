@@ -1,9 +1,21 @@
 app_pods
-The connection to the server localhost:8080 was refused - did you specify the right host or port?
+[sudo] password for gor: NAME                                      READY   STATUS      RESTARTS   AGE
+auth-cleanup-28589820-25f8s               0/1     Completed   0          40h
+auth-cleanup-28591260-jhrx7               0/1     Completed   0          16h
+bfs-658pm                                 0/1     Init:0/2    0          35d
+diagnosis-6f6658856c-ft8l2                0/3     Init:0/1    0          35d
+es-index-cleanup-28589820-cqmfk           0/1     Completed   0          40h
+es-index-cleanup-28591260-cb7kf           0/1     Completed   0          16h
+gpms-g457n                                0/1     Init:0/2    0          35d
+sam-cleanup-28589820-9dfng                0/1     Completed   0          40h
+sam-cleanup-28591260-br8dg                0/1     Completed   0          16h
+sorter-cleanup-28589820-mpzc5             0/1     Completed   0          40h
+sorter-cleanup-28591260-2jn2x             0/1     Completed   0          16h
+station-dashboard-szqm5                   0/1     Completed   0          35d
 END_OF_OUTPUT
 
 system_pods
-The connection to the server localhost:8080 was refused - did you specify the right host or port?
+[sudo] password for gor: NAME                                    READY   STATUS    RESTARTS   AGE
 END_OF_OUTPUT
 
 postgres_promoted
@@ -15,21 +27,19 @@ Postgres Replication is not working
 END_OF_OUTPUT
 
 load_kmaster
-1.62, 1.61, 1.64
+0.19, 0.23, 0.25
 END_OF_OUTPUT
 
 load_knode1
-5.17, 5.40, 5.61
+0.28, 0.33, 0.42
 END_OF_OUTPUT
 
 load_knode2
-1.62, 1.29, 1.13
+5.04, 1.66, 1.21
 END_OF_OUTPUT
 
 certificate_expiry
-Error: unknown command "certs" for "kubeadm"
-Run 'kubeadm --help' for usage.
-error: unknown command "certs" for "kubeadm"
+272d
 END_OF_OUTPUT
 
 nfs_status

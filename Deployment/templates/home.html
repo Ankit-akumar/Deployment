@@ -7,11 +7,12 @@
         font-size: x-large !important;
     }
 
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .main {
@@ -19,12 +20,12 @@
     }
 
     .row {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      margin: 10px;
-      transition: background-color 0.3s ease;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        margin: 10px;
+        transition: background-color 0.3s ease;
     }
 
     .row:hover {
@@ -32,100 +33,139 @@
     }
 
     .expanded-content {
-      display: none;
-      width: 100%;
-      padding: 20px;
+        display: none;
+        width: 100%;
+        padding: 20px;
     }
 
     .expanded-content.open {
-      display: block;
+        display: block;
     }
 </style>
 {% endblock %}
-    
+
 {% block content %}
 {% if user.is_authenticated %}
 
 <div class="main">
-<div class="row" onclick="toggleContent('content1')">
-    <div class="row-content">
-      <h3 style="padding-left: 20px;">Deployment</h3>
+    <div class="row" onclick="toggleContent('content1')">
+        <div class="row-content">
+            <h3 style="padding-left: 20px;">Deployment</h3>
+        </div>
+        <div id="content1" class="expanded-content" onclick="stopPropagation(event)">
+            <div class="content" style="border: thin lightgray">
+                <form id="deployment-form" action="" method="POST">
+                    {% csrf_token %}
+                    <h4>Select the Deployment Type:</h4>
+                        <select name="deployment_type" id="deployment_type">
+                            <option value="none">select deployment type</option>
+                            <option value="pre_deployment">Pre Deployment</option>
+                            <option value="post_deployment">Post Deployment</option>
+                        </select>
+                        <h4>Select the Site:</h2>
+                            <select name="site" id="site">
+                                <option value="none">select a site</option>
+                                {% for value in site_model_instances %}
+                                <option value="{{ value }}">{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                            <br><br>
+                            <input type="hidden" name="form_id" value="deployment-form">
+                            <div class="btn-container">
+                                <button id="loadButton" class="btn btn-success" type="submit">
+                                    Submit
+                                    <div class="loader" id="loader">
+                                    </div>
+                                </button>
+                            </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div id="content1" class="expanded-content" onclick="stopPropagation(event)">
-        <div class="content" style="border: thin lightgray">
-            <form id="deployment-form" action = "" method = "POST">
-                {% csrf_token %} 
-                <h4>Select the Deployment Type:</h2>
-                <select name="deployment_type" id="deployment_type">
-                    <option value="none">select deployment type</option>
-                    <option value="pre_deployment">Pre Deployment</option>
-                    <option value="post_deployment">Post Deployment</option>
-                </select>
-                <h4>Select the Site:</h2>
-                <select name="site" id="site">
-                    <option value="none">select a site</option>
-                    {% for value in site_model_instances %}
+
+    <div class="row" onclick="toggleContent('content2')">
+        <div class="row-content">
+            <h3 style="padding-left: 20px;">Maintenance checks</h3>
+        </div>
+        <div id="content2" class="expanded-content" onclick="stopPropagation(event)">
+            <form id="maintenance-form" action="" method="POST">
+                {% csrf_token %}
+                <h4>Select the Site:</h4>
+                    <select name="site" id="site">
+                        <option value="none">select a site</option>
+                        {% for value in site_model_instances %}
                         <option value="{{ value }}">{{ value }}</option>
-                    {% endfor %}
-                </select>
-                <br><br>
-                <input type="hidden" name="form_id" value="deployment-form">
-                <div class="btn-container"> 
-                    <button id="loadButton" class="btn btn-success" type="submit"> 
-                        Submit 
-                        <div class="loader" id="loader"> 
-                        </div> 
-                    </button> 
-                </div> 
+                        {% endfor %}
+                    </select>
+                    <br><br>
+                    <input type="hidden" name="form_id" value="maintenance-form">
+                    <div class="btn-container">
+                        <button id="loadButton" class="btn btn-success" type="submit">
+                            Submit
+                            <div class="loader" id="loader">
+                            </div>
+                        </button>
+                    </div>
             </form>
         </div>
     </div>
-  </div>
-  
-  <div class="row" onclick="toggleContent('content2')">
-    <div class="row-content">
-        <h3 style="padding-left: 20px;">Maintenance checks</h3>
-    </div>
-    <div id="content2" class="expanded-content" onclick="stopPropagation(event)">
-        <form id="maintenance-form" action = "" method = "POST">
-            {% csrf_token %} 
-            <h4>Select the Site:</h2>
-            <select name="site" id="site">
-                <option value="none">select a site</option>
-                {% for value in site_model_instances %}
+
+    <div class="row" onclick="toggleContent('content3')">
+        <div class="row-content">
+            <h3 style="padding-left: 20px;">Backup files</h3>
+        </div>
+        <div id="content3" class="expanded-content" onclick="stopPropagation(event)">
+            <form id="backupfiles-form" action="" method="POST">
+                {% csrf_token %}
+                <h4>Select the File:</h4>
+                <select name="file" id="file">
+                    <option value="none">select a file</option>
+                    <option value="mdConfig">MD Configuration File</option>
+                    <option value="sorterDevices">Sorter Devices File</option>
+                    <option value="samDevices">SAM Devices File</option>
+                    <option value="runningMap">Map</option>
+                </select>
+                <h4>Select the Site:</h4>
+                <select name="site" id="site">
+                    <option value="none">select a site</option>
+                    {% for value in site_model_instances %}
                     <option value="{{ value }}">{{ value }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <input type="hidden" name="form_id" value="maintenance-form">
-            <div class="btn-container"> 
-                <button id="loadButton" class="btn btn-success" type="submit"> 
-                    Submit 
-                    <div class="loader" id="loader"> 
-                    </div> 
-                </button> 
-            </div> 
-        </form>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <input type="hidden" name="form_id" value="backupfiles-form">
+                <div class="btn-container">
+                    <button id="loadButton" class="btn btn-success" type="submit">
+                        Submit
+                        <div class="loader" id="loader">
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
-  
-  <script>
-  function toggleContent(contentId) {
-    var content = document.getElementById(contentId);
-    content.classList.toggle('open');
-  }
 
-    function stopPropagation(event) {
-    event.stopPropagation();
-    }
-  </script>
+    <script>
+        function toggleContent(contentId) {
+            var content = document.getElementById(contentId);
+            content.classList.toggle('open');
+        }
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+        function stopPropagation(event) {
+            event.stopPropagation();
+        }
+    </script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
 
 </div>
 {% else %}

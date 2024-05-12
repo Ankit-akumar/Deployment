@@ -30,13 +30,20 @@ def home_view(request):
                     url = reverse('PostDeployment:postDeploymentChecks') + f'?site={site}'
                     return HttpResponseRedirect(url)
         
-        if form_type == 'maintenance-form':
+        elif form_type == 'maintenance-form':
             site = request.POST.get('site')
             print(site)
 
             if(site != 'none'):
                 url = reverse('Maintenance:maintenanceChecks') + f'?site={site}'
                 return HttpResponseRedirect(url)
+            
+        elif form_type == 'backupfiles-form':
+            file = request.POST.get('file')
+            site = request.POST.get('site')
+
+            # if(file != 'none' and site != 'none'):
+
 
     
     return render(request, 'home.html', {'site_model_instances': site_model_instances})

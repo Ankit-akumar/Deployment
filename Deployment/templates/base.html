@@ -6,10 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{% endblock %}</title>
   <style>
-        .myspans {
-            float: right;
-            color: white;
-        }
+    .myspans {
+      float: right;
+      color: white;
+    }
+    .inline-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-right: 10px;
+}
   </style>
   {% block css %}
   {% endblock %}
@@ -17,34 +23,40 @@
 
 <body>
   <main>
-    <nav class="navbar fixed-top navbar-static-top" style="background-color: black;">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h2" style="color: white;">
-                Home
-            </span>
-            <div class="myspans">
-            <span class="logout-section">
-                {% if user.is_authenticated %}
-                <p style="margin: 5px;">Welcome {{ user.username }}</p>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Log Out</button>
-                  </form>
-                {% endif %}
-            </span>
+    <nav class="navbar fixed-top navbar-static-top" style="background-color: 	#8CB91B;">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h2" style="color: white;">
+          TAC Dashboard
+        </span>
+        <div class="myspans">
+          <span class="logout-section">
+            {% if user.is_authenticated %}
+            <div class="inline-container">
+            <p style="margin-right: 20px; margin-top: 10px;">Welcome {{ user.username }}</p>
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Log Out</button>
+            </form>
             </div>
+            {% endif %}
+          </span>
         </div>
+      </div>
     </nav>
 
     {% block content %}
     {% endblock %}
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css"
+      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+      crossorigin="anonymous"></script>
 
   </main>
 </body>
