@@ -12,6 +12,8 @@ class SiteModel(models.Model):
     username = models.CharField(max_length=50, blank=False, help_text="This username will be used to access the servers.")
     password = models.CharField(max_length=50, blank=False, help_text="The password for the username. Will be used to access servers.")
     dashboard_url = models.URLField(max_length=200)
+    dashboard_username = models.CharField(max_length=50, blank=False, help_text="This username will be used to login to dashboards.")
+    dashboard_password = models.CharField(max_length=50, blank=False, help_text="This password will be used to login to dashboards.")
     is_cloud_site = models.BooleanField(help_text="True if this is a cloud site else if on prem site then False.")
 
     def __str__(self): 

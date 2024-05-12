@@ -1,60 +1,46 @@
 bot_tasks
 
-Bot ID: 6373, Task Type: charge
+Bot ID: 6196, Task Type: charge
 
-Bot ID: 6379, Task Type: parking
+Bot ID: 6210, Task Type: charge
 
-Bot ID: 6386, Task Type: parking
-
-Bot ID: 6371, Task Type: parking
-
-Bot ID: 6375, Task Type: charge
-
-Bot ID: 6388, Task Type: induction
+Bot ID: 6221, Task Type: charge
 
 END_OF_OUTPUT
 
 induct_status
 
-Induct ID : 44, Status : active
+Induct ID : 34, Status : error
 
-Induct ID : 5, Status : active
+Induct ID : 44, Status : error
 
-Induct ID : 36, Status : active
+Induct ID : 1, Status : stopped
 
-Induct ID : 32, Status : active
+Induct ID : 2, Status : stopped
 
-Induct ID : 4, Status : active
+Induct ID : 32, Status : error
 
-Induct ID : 2, Status : active
+Induct ID : 4, Status : stopped
 
-Induct ID : 3, Status : active
-
-Induct ID : 1, Status : active
-
-Induct ID : 34, Status : active
+Induct ID : 3, Status : stopped
 
 END_OF_OUTPUT
 
 ws_status
 
-Wait Station ID : 44, Status : active
+Wait Station ID : 34, Status : error
 
-Wait Station ID : 5, Status : active
+Wait Station ID : 44, Status : error
 
-Wait Station ID : 36, Status : active
+Wait Station ID : 1, Status : stopped
 
-Wait Station ID : 32, Status : active
+Wait Station ID : 2, Status : stopped
 
-Wait Station ID : 4, Status : active
+Wait Station ID : 32, Status : error
 
-Wait Station ID : 2, Status : active
+Wait Station ID : 4, Status : stopped
 
-Wait Station ID : 3, Status : active
-
-Wait Station ID : 1, Status : active
-
-Wait Station ID : 34, Status : active
+Wait Station ID : 3, Status : stopped
 
 END_OF_OUTPUT
 
