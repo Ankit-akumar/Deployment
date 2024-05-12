@@ -175,7 +175,7 @@ def downloadMDConfig(url, mdDbDriver):
         print("No disabled input tag found.")
 
 
-def getMap(url, mdDbDriver):
+def getMap(url, mdDbDriver, takeSnap=True):
     driver = mdDbDriver
     driver.get(url)
 
@@ -201,7 +201,8 @@ def getMap(url, mdDbDriver):
                 span_text = next_span_tag.text.strip()
                 driver.find_element(By.CSS_SELECTOR, 'button.btn.close-btn').click()
                 time.sleep(2)
-                driver.save_screenshot('backup/map.png')
+                if takeSnap:
+                    driver.save_screenshot('backup/map.png')
                 return span_text
             else:
                 print("Span tag not found after div with id 'info_side_panel'")
@@ -259,8 +260,6 @@ def backupFiles(instance):
     username = instance.dashboard_username
     password = instance.dashboard_password
 
-    # Creating object of login class
-    # login = Login()
     # Logging into sorter dashboard and getting driver object 
     sorterDbDriver = login(URL+"/sorter/login/", "id_username", "id_password", "submit-row", username, password)
 
