@@ -34,7 +34,7 @@ def get_instance_by_field_value(site):
     except SiteModel.DoesNotExist:
         return None
     
-def executeScript(instance):
+def checkServerHealth(instance):
     try:            
         username = instance.username
         password = instance.password
@@ -83,7 +83,7 @@ def postDeploymentChecks(request):
     instance = get_instance_by_field_value(site)
     if instance:
         print("Instance found:", instance)
-        context = executeScript(instance)
+        context = checkServerHealth(instance)
     else:
         print("Instance not found for the given site value.")
     

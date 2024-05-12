@@ -1,0 +1,9 @@
+{
+    "subscription_urls": {
+        "8": "http://wcsservice.bw.wcs.prod/misplace_shipment_notification",
+        "4": "http://wcsservice.bw.wcs.prod/destination_notification",
+        "3": "http://wcsservice.bw.wcs.prod/destination_notification"
+    },
+    "currentRunningMap": "Prod_10_08_2023_dup",
+    "currentRunningMapID": "23"
+}

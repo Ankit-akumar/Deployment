@@ -1,46 +1,116 @@
 bot_tasks
 
-Bot ID: 6196, Task Type: charge
+Bot ID: 6360, Task Type: wait_queue_ops
 
-Bot ID: 6210, Task Type: charge
+Bot ID: 6344, Task Type: wait_queue_ops
 
-Bot ID: 6221, Task Type: charge
+Bot ID: 6193, Task Type: wait_queue_ops
+
+Bot ID: 6168, Task Type: wait_queue_ops
+
+Bot ID: 6182, Task Type: wait_queue_ops
+
+Bot ID: 6364, Task Type: wait_queue_ops
+
+Bot ID: 6355, Task Type: wait_queue_ops
+
+Bot ID: 6365, Task Type: wait_queue_ops
+
+Bot ID: 6367, Task Type: wait_queue_ops
+
+Bot ID: 6190, Task Type: wait_queue_ops
+
+Bot ID: 6176, Task Type: wait_queue_ops
+
+Bot ID: 6184, Task Type: wait_queue_ops
+
+Bot ID: 6354, Task Type: induction
+
+Bot ID: 6363, Task Type: wait_queue_ops
+
+Bot ID: 6351, Task Type: induction
+
+Bot ID: 6191, Task Type: wait_queue_ops
+
+Bot ID: 6346, Task Type: wait_queue_ops
+
+Bot ID: 6342, Task Type: wait_queue_ops
+
+Bot ID: 6362, Task Type: induction
+
+Bot ID: 6166, Task Type: wait_queue_ops
+
+Bot ID: 6189, Task Type: wait_queue_ops
+
+Bot ID: 6366, Task Type: wait_queue_ops
+
+Bot ID: 6178, Task Type: charge
+
+Bot ID: 6186, Task Type: wait_queue_ops
+
+Bot ID: 6358, Task Type: sortation
+
+Bot ID: 6350, Task Type: wait_queue_ops
+
+Bot ID: 6180, Task Type: wait_queue_ops
+
+Bot ID: 6167, Task Type: wait_queue_ops
+
+Bot ID: 6368, Task Type: wait_queue_ops
+
+Bot ID: 6187, Task Type: induction
+
+Bot ID: 6185, Task Type: wait_queue_ops
+
+Bot ID: 6357, Task Type: wait_queue_ops
+
+Bot ID: 6164, Task Type: wait_queue_ops
+
+Bot ID: 6356, Task Type: charge
+
+Bot ID: 6169, Task Type: wait_queue_ops
+
+Bot ID: 6361, Task Type: wait_queue_ops
+
+Bot ID: 6337, Task Type: wait_queue_ops
+
+Bot ID: 6171, Task Type: wait_queue_ops
 
 END_OF_OUTPUT
 
 induct_status
 
-Induct ID : 34, Status : error
+Induct ID : 1, Status : active
 
-Induct ID : 44, Status : error
+Induct ID : 2, Status : active
 
-Induct ID : 1, Status : stopped
+Induct ID : 32, Status : active
 
-Induct ID : 2, Status : stopped
+Induct ID : 34, Status : active
 
-Induct ID : 32, Status : error
+Induct ID : 3, Status : active
 
-Induct ID : 4, Status : stopped
+Induct ID : 4, Status : active
 
-Induct ID : 3, Status : stopped
+Induct ID : 44, Status : active
 
 END_OF_OUTPUT
 
 ws_status
 
-Wait Station ID : 34, Status : error
+Wait Station ID : 1, Status : active
 
-Wait Station ID : 44, Status : error
+Wait Station ID : 2, Status : active
 
-Wait Station ID : 1, Status : stopped
+Wait Station ID : 32, Status : active
 
-Wait Station ID : 2, Status : stopped
+Wait Station ID : 34, Status : active
 
-Wait Station ID : 32, Status : error
+Wait Station ID : 3, Status : active
 
-Wait Station ID : 4, Status : stopped
+Wait Station ID : 4, Status : active
 
-Wait Station ID : 3, Status : stopped
+Wait Station ID : 44, Status : active
 
 END_OF_OUTPUT
 
