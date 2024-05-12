@@ -21,8 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("Home.urls"), name='home'),
     path('accounts/', include("django.contrib.auth.urls")),
-    #path('pre_deployment/<str:site>/', include("PreDeployment.urls"), name='pre_deployment'),
     path('pre_deployment/', include(("PreDeployment.urls", 'PreDeployment'), namespace='PreDeployment')),
     path('post_deployment/', include(("PostDeployment.urls", 'PostDeployment'), namespace='PostDeployment')),
     path('maintenance/', include(('Maintenance.urls', 'Maintenance'), namespace='Maintenance')),
+    path('backup_files/', include(('BackupFiles.urls', 'BackupFiles'), namespace='BackupFiles')),
 ]
+
+#path('pre_deployment/<str:site>/', include("PreDeployment.urls"), name='pre_deployment'),

@@ -42,8 +42,9 @@ def home_view(request):
             file = request.POST.get('file')
             site = request.POST.get('site')
 
-            # if(file != 'none' and site != 'none'):
-
-
+            if(file != 'none' and site != 'none'):
+                url = reverse('BackupFiles:getFileBackup') + f'?site={site}&file={file}'
+                return HttpResponseRedirect(url)
+                
     
     return render(request, 'home.html', {'site_model_instances': site_model_instances})
