@@ -85,7 +85,7 @@
 
     <div class="row" onclick="toggleContent('content2')">
         <div class="row-content">
-            <h3 style="padding-left: 20px;">Maintenance checks</h3>
+            <h3 style="padding-left: 20px;">Post Maintenance checks</h3>
         </div>
         <div id="content2" class="expanded-content" onclick="stopPropagation(event)">
             <form id="maintenance-form" action="" method="POST">
@@ -169,7 +169,7 @@
 
 </div>
 {% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a>
+<p style="margin-left: 10px;">You are not logged in!</p>
+<a style="margin-left: 10px;" href="{% url 'login' %}">Log In here</a>
 {% endif %}
 {% endblock %}

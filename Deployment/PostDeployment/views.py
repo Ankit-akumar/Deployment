@@ -48,6 +48,29 @@ def login(url, usernameId, passwordId, submitId, username, password):
             time.sleep(3)
             return driver
         
+def loginMD(url, username, password):
+        driver = webdriver.Chrome()
+        driver.get(url)
+        try:
+            WebDriverWait(driver,30).until(
+                EC.presence_of_element_located((By.XPATH, "//button[contains(text(), 'LOGIN')]"))
+            )
+        except Exception as e:
+            print("While waiting for the page of load encountered this error:", e)
+        finally:
+            driver.find_element(By.CLASS_NAME, "username-textbox").send_keys(username)
+            driver.find_element(By.CLASS_NAME, "password-textbox").send_keys(password)
+            driver.find_element(By.XPATH, "//button[contains(text(), 'LOGIN')]").click()
+            time.sleep(2)
+            return driver
+        
+def stopSystem(driver, URL):
+    driver.get(URL+'system/')
+    stop_btn = driver.find_element(By.XPATH, "(//input[@class='emergency-stop-button'])")
+    if stop_btn:
+        stop_btn.click()
+
+
 def uploadMap(URL, mdDriver, currentRunningMap):
     driver = mdDriver
     driver.get(URL)
@@ -133,6 +156,8 @@ def updateDashboardData(URL, username, password):
     result_dict = readDataFromFile()
     driver = login(URL+"sorter/login/", "id_username", "id_password", "submit-row", username, password)
     updateSubscriptionUrls(driver, result_dict['subscription_urls'], URL+'sorter/data/subscription/')
+    driver = loginMD(URL+"login/", username, password)
+    stopSystem(driver, URL)
     uploadMap(URL+'map-creator/', driver, result_dict['currentRunningMap'])
 
 
