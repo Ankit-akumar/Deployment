@@ -58,14 +58,17 @@
                     {% csrf_token %}
                     <h4>Select the Deployment Type:</h4>
                         <select name="deployment_type" id="deployment_type">
-                            <option value="none">select deployment type</option>
+                            <option value="" disabled selected>select deployment type</option>
                             <option value="pre_deployment">Pre Deployment</option>
                             <option value="post_deployment">Post Deployment</option>
                         </select>
                         <h4>Select the Site:</h2>
                             <select name="site" id="site">
-                                <option value="none">select a site</option>
+                                <option value="" disabled selected>select a site</option>
                                 {% for value in site_model_instances %}
+                                <option value="{{ value }}">{{ value }}</option>
+                                {% endfor %}
+                                {% for value in cloudSite_model_instances %}
                                 <option value="{{ value }}">{{ value }}</option>
                                 {% endfor %}
                             </select>
@@ -92,8 +95,11 @@
                 {% csrf_token %}
                 <h4>Select the Site:</h4>
                     <select name="site" id="site">
-                        <option value="none">select a site</option>
+                        <option value="" disabled selected>select a site</option>
                         {% for value in site_model_instances %}
+                        <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                        {% for value in cloudSite_model_instances %}
                         <option value="{{ value }}">{{ value }}</option>
                         {% endfor %}
                     </select>
@@ -119,7 +125,7 @@
                 {% csrf_token %}
                 <h4>Select the File:</h4>
                 <select name="file" id="file">
-                    <option value="none">select a file</option>
+                    <option value="" disabled selected>select a file</option>
                     <option value="1">MD Configuration File</option>
                     <option value="2">Sorter Devices File</option>
                     <option value="3">SAM Devices File</option>
@@ -127,8 +133,11 @@
                 </select>
                 <h4>Select the Site:</h4>
                 <select name="site" id="site">
-                    <option value="none">select a site</option>
+                    <option value="" disabled selected>select a site</option>
                     {% for value in site_model_instances %}
+                    <option value="{{ value }}">{{ value }}</option>
+                    {% endfor %}
+                    {% for value in cloudSite_model_instances %}
                     <option value="{{ value }}">{{ value }}</option>
                     {% endfor %}
                 </select>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .models import SiteModel
+from .models import SiteModel, CloudSite
 
 
 # Create your views here.
@@ -10,8 +10,12 @@ from .models import SiteModel
 @csrf_exempt
 def home_view(request):    
     site_model_instances = SiteModel.objects.all()
-    for site_instance in site_model_instances:
-        print(site_instance.name)
+    cloudSite_model_instances = CloudSite.objects.all()
+
+    context = {
+        'site_model_instances': site_model_instances, 
+        'cloudSite_model_instances': cloudSite_model_instances
+    }
         
     if request.method == 'POST':
         form_type = request.POST.get('form_id')
@@ -22,7 +26,7 @@ def home_view(request):
             site = request.POST.get('site')
             print(site)
 
-            if(deployment_type != 'none' and site != 'none'):
+            if site:
                 if(deployment_type == 'pre_deployment'):
                     url = reverse('PreDeployment:preDeploymentChecks') + f'?site={site}'
                     return HttpResponseRedirect(url)
@@ -47,4 +51,4 @@ def home_view(request):
                 return HttpResponseRedirect(url)
                 
     
-    return render(request, 'home.html', {'site_model_instances': site_model_instances})
+    return render(request, 'home.html', context)
