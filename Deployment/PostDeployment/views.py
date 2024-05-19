@@ -15,7 +15,7 @@ import os
 
 # Create your views here.
 
-def readDataFromFile():
+def readDataFromBackupFile():
     with open('backup/depBkp.json','r') as file:
         data = json.load(file)
 
@@ -153,7 +153,7 @@ def updateSubscriptionUrls(sorterDriver, subscription_urls, URL):
         print(submit_btn.get_attribute('name'))
 
 def updateDashboardData(URL, username, password):
-    result_dict = readDataFromFile()
+    result_dict = readDataFromBackupFile()
     driver = login(URL+"sorter/login/", "id_username", "id_password", "submit-row", username, password)
     updateSubscriptionUrls(driver, result_dict['subscription_urls'], URL+'sorter/data/subscription/')
     driver = loginMD(URL+"login/", username, password)
