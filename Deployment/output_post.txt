@@ -1,45 +1,43 @@
 app_pods
-[sudo] password for gor: NAME                                      READY   STATUS      RESTARTS   AGE
-auth-cleanup-28589820-25f8s               0/1     Completed   0          40h
-auth-cleanup-28591260-jhrx7               0/1     Completed   0          16h
-bfs-658pm                                 0/1     Init:0/2    0          35d
-diagnosis-6f6658856c-ft8l2                0/3     Init:0/1    0          35d
-es-index-cleanup-28589820-cqmfk           0/1     Completed   0          40h
-es-index-cleanup-28591260-cb7kf           0/1     Completed   0          16h
-gpms-g457n                                0/1     Init:0/2    0          35d
-sam-cleanup-28589820-9dfng                0/1     Completed   0          40h
-sam-cleanup-28591260-br8dg                0/1     Completed   0          16h
-sorter-cleanup-28589820-mpzc5             0/1     Completed   0          40h
-sorter-cleanup-28591260-2jn2x             0/1     Completed   0          16h
-station-dashboard-szqm5                   0/1     Completed   0          35d
+NAME                                      READY   STATUS      RESTARTS   AGE
+auth-cleanup-28601340-ffzj4               0/1     Completed   0          33h
+auth-cleanup-28602780-kpcsk               0/1     Completed   0          9h
+bfs-z6hvm                                 0/1     Init:0/2    0          75m
+es-index-cleanup-28601340-nxktl           0/1     Completed   0          33h
+es-index-cleanup-28602780-klqsb           0/1     Completed   0          9h
+gpms-79grf                                0/1     Init:0/2    0          44d
+sam-cleanup-28601340-xzlrn                0/1     Completed   0          33h
+sam-cleanup-28602780-mqjtd                0/1     Completed   0          9h
+sorter-cleanup-28601340-rv5ft             0/1     Completed   0          33h
+sorter-cleanup-28602780-pcrqb             0/1     Completed   0          9h
 END_OF_OUTPUT
 
 system_pods
-[sudo] password for gor: NAME                                    READY   STATUS    RESTARTS   AGE
+NAME                                    READY   STATUS    RESTARTS   AGE
 END_OF_OUTPUT
 
 postgres_promoted
-Postgres is Promoted!!
+Postgres is not Promoted
 END_OF_OUTPUT
 
 postgres_replication
-Postgres Replication is not working
+Postgres Replication is working
 END_OF_OUTPUT
 
 load_kmaster
-0.19, 0.23, 0.25
+0.72, 0.97, 0.80
 END_OF_OUTPUT
 
 load_knode1
-0.28, 0.33, 0.42
+2.84, 2.80, 2.74
 END_OF_OUTPUT
 
 load_knode2
-5.04, 1.66, 1.21
+0.52, 0.45, 0.48
 END_OF_OUTPUT
 
 certificate_expiry
-272d
+76d
 END_OF_OUTPUT
 
 nfs_status
