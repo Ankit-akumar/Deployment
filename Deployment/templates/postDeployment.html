@@ -23,8 +23,10 @@
 {% endblock %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
 
+{% if server_type == 'onprem' %}
 <div class="content">
     <h3>{{ heading }}</h3>
     <br>
@@ -91,6 +93,37 @@
         autoResize('textarea8');
         autoResize('textarea9');
     </script>
+
+{% else %}
+
+<div class="content">
+    <h3>{{ heading }}</h3>
+    <br>
+    <h4>Application pods not in running state</h4>
+    <textarea readonly id="textarea1" class="textarea" rows="5" cols="80" style="width: 100%;">{{ app_pods }}</textarea>
+
+    <h4>System pods not in running state</h4>
+    <textarea readonly id="textarea2" class="resizable-textarea" rows="1" cols="80"
+        oninput="autoResize('textarea2')">{{ system_pods }}</textarea>
+
+    <h4>Average Load on server </h4>
+    <textarea readonly id="textarea3" class="resizable-textarea" rows="1" cols="80"
+        oninput="autoResize('textarea3')">{{ load_average }}</textarea>
+
+    <script>
+        function autoResize(textareaId) {
+            var textarea = document.getElementById(textareaId);
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+
+        // autoResize('textarea1');
+        autoResize('textarea2');
+        autoResize('textarea3');
+    </script>
+
+{% endif %}
+
     <br>
 </div>
 {% else %}

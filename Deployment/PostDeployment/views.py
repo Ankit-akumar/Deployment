@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.http import Http404
 import subprocess
 import os
-from Home.models import SiteModel
+from Home.models import SiteModel, CloudSite
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -184,10 +185,46 @@ def readDataFromFile(start_string):
 def get_instance_by_field_value(site):
     try:
         instance = SiteModel.objects.get(name=site)
-        return instance
+        return instance, 'onprem'
     except SiteModel.DoesNotExist:
-        return None
-    
+        try:
+            instance = CloudSite.objects.get(name=site)
+            return instance, 'cloud'
+        except CloudSite.DoesNotExist:
+            return None
+
+def checkCloudServerHealth(instance):
+    try:            
+        username = instance.username
+        password = instance.password
+        hostname = instance.hostname
+        cluster_name = instance.cluster_name
+        namespace_name = instance.namespace_name
+
+        script_path = os.path.abspath('PostDeployment/post_deployment_checks_cloud.sh')
+        subprocess.run(["bash", script_path, username, password, hostname, cluster_name, namespace_name])
+
+        app_pods = readDataFromFile('app_pods')
+        system_pods = readDataFromFile('system_pods')
+        load_average = readDataFromFile('load_average')
+
+        context = {
+            'server_type': 'cloud',
+            'heading': instance.name+' Post Deployment Check Results',
+            'app_pods': app_pods,
+            'system_pods': system_pods,
+            'load_average': load_average
+        }
+        return context
+
+    except FileNotFoundError:
+        print(f"Error: Bash script '{script_path}' not found.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error: Bash script '{script_path}' failed with exit code {e.returncode}.")
+        print("Output:")
+        print(e.output.decode())
+
+
 def checkServerHealth(instance):
     try:            
         username = instance.username
@@ -210,7 +247,9 @@ def checkServerHealth(instance):
         nfs_status = readDataFromFile('nfs_status')
 
         context = {
-            'heading': 'Post Deployment Check Results',
+            'server_type': 'onprem',
+            # 'heading': 'Post Deployment Check Results',
+            'heading': instance.name+' Post Deployment Check Results',
             'app_pods': app_pods,
             'system_pods': system_pods,
             'postgres_promoted': postgres_promoted,
@@ -234,13 +273,17 @@ def postDeploymentChecks(request):
     site = request.GET.get('site')
     print(site)
     
-    instance = get_instance_by_field_value(site)
+    instance, server_type = get_instance_by_field_value(site)
     if instance:
         print("Instance found:", instance)
-        context = checkServerHealth(instance)
+        if server_type == 'onprem':
+            context = checkServerHealth(instance)
+        else:
+            context = checkCloudServerHealth(instance)
         # updateDashboardData(instance.dashboard_url, instance.dashboard_username, instance.dashboard_password)
     else:
         print("Instance not found for the given site value.")
+        raise Http404('Selected site not found in the Database.')
     
     return render(request, 'postDeployment.html', context)
 
