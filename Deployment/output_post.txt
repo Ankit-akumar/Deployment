@@ -1,49 +1,21 @@
 app_pods
-NAME                                      READY   STATUS      RESTARTS   AGE
-auth-cleanup-28601340-ffzj4               0/1     Completed   0          33h
-auth-cleanup-28602780-kpcsk               0/1     Completed   0          9h
-bfs-z6hvm                                 0/1     Init:0/2    0          75m
-es-index-cleanup-28601340-nxktl           0/1     Completed   0          33h
-es-index-cleanup-28602780-klqsb           0/1     Completed   0          9h
-gpms-79grf                                0/1     Init:0/2    0          44d
-sam-cleanup-28601340-xzlrn                0/1     Completed   0          33h
-sam-cleanup-28602780-mqjtd                0/1     Completed   0          9h
-sorter-cleanup-28601340-rv5ft             0/1     Completed   0          33h
-sorter-cleanup-28602780-pcrqb             0/1     Completed   0          9h
+NAME                                      READY   STATUS      RESTARTS         AGE
+auth-cleanup-28602780-kwlbb               0/1     Completed   0                29h
+auth-cleanup-28604220-cgc2g               0/1     Completed   0                5h2m
+kapacitor-6b75d6bc88-r4fwc                0/1     Completed   0                233d
+sam-cleanup-28602780-2jnwx                0/1     Completed   0                29h
+sam-cleanup-28604220-c78kd                0/1     Completed   0                5h2m
+sorter-cleanup-28602780-q96g5             0/1     Completed   0                29h
+sorter-cleanup-28604220-p8b4f             0/1     Completed   0                5h2m
+
 END_OF_OUTPUT
 
 system_pods
-NAME                                    READY   STATUS    RESTARTS   AGE
+NAME                                                             READY   STATUS    RESTARTS      AGE
+
 END_OF_OUTPUT
 
-postgres_promoted
-Postgres is not Promoted
-END_OF_OUTPUT
-
-postgres_replication
-Postgres Replication is working
-END_OF_OUTPUT
-
-load_kmaster
-0.72, 0.97, 0.80
-END_OF_OUTPUT
-
-load_knode1
-2.84, 2.80, 2.74
-END_OF_OUTPUT
-
-load_knode2
-0.52, 0.45, 0.48
-END_OF_OUTPUT
-
-certificate_expiry
-76d
-END_OF_OUTPUT
-
-nfs_status
-NFS is mounted on Kmaster
-
-nfs_status
-NFS is running
+load_average
+0.41, 0.16, 0.11
 END_OF_OUTPUT
 

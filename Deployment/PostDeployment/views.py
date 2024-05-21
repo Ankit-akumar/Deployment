@@ -12,7 +12,6 @@ from bs4 import BeautifulSoup as bs
 import re
 import time
 import json
-import os
 
 # Create your views here.
 
@@ -67,9 +66,15 @@ def loginMD(url, username, password):
         
 def stopSystem(driver, URL):
     driver.get(URL+'system/')
-    stop_btn = driver.find_element(By.XPATH, "(//input[@class='emergency-stop-button'])")
-    if stop_btn:
-        stop_btn.click()
+    try:
+        buttons = driver.find_elements(By.CLASS_NAME, "emergency-stop-button")
+        for button in buttons:
+            if button.text == "STOP SYSTEM":
+               button.click()
+               print('found stop system button')
+               break
+    except Exception as e:
+        print(e)
 
 
 def uploadMap(URL, mdDriver, currentRunningMap):
@@ -152,6 +157,7 @@ def updateSubscriptionUrls(sorterDriver, subscription_urls, URL):
     if submit_btn:
         print('found')
         print(submit_btn.get_attribute('name'))
+        submit_btn.click()
 
 def updateDashboardData(URL, username, password):
     result_dict = readDataFromBackupFile()
